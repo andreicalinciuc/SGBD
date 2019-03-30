@@ -3,9 +3,9 @@ Andrei:
     ☐ sa aveti un script de creare care sa si insereze date in tabele. Tabelele generate trebuie sa aiba foarte multe date, echivalente cu tabele care ar putea exista in productie intr-o firma (de magnitudinea a milioane de randuri pe tabele).
     
 Radu:
-    ☐ ne povestiti ce vreti sa fac aplicatia si care sunt caracteristicle sale (e.g. facem conturi / verificam parole / vindem pinguini)
+    ✔ ne povestiti ce vreti sa fac aplicatia si care sunt caracteristicle sale (e.g. facem conturi / verificam parole / vindem pinguini) @done(19-03-30 15:28)
     ☐ sa aveti o lista cu functiile si procedurile pe care le veti utiliza (pentru a putea fi vizibil gradul de complexitate al proiectului) si o descriere succinta a fiecareia.
+    ☐ sa descrieti si motivati utilitatea fiecarei structuri de date ce o utilizati sau o veti utiliza (indecsi, views, tabele)
 
 Not assigned:
     ☐ sa fiti capabili sa spuneti in ce forma normala este baza de date (2NF, 3NF, BCNF, 4NF) si care este motivatia pentru care sustineti ca este in acea forma normala (fara demonstratie acest subpunct nu va fi notat).
-    ☐ sa descrieti si motivati utilitatea fiecarei structuri de date ce o utilizati sau o veti utiliza (indecsi, views, tabele)

@@ -1,0 +1,8 @@
+Adaugarea/Scoaterea statiilor.
+Angajarea/Concedierea soferilor.
+Cumpararea/Scoaterea vehiculelor.
+Mutarea unor vehicule dintr-un depou in altul.
+Adaugarea/Scoaterea traseelor.
+Manipularea unui traseu. (adaugarea/stergerea de statii)
+Inceperea/Terminarea unei curse. (Asignare sofer, Asignare vehicul, Asignare traseu)
+Inregistrarea unui pasager care urca/coboara intr-o/dintr-o vehicul. ( automat )
