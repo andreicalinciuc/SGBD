@@ -1,7 +1,7 @@
-Client cere ruta cea mai rapida de la X la Y.
-Aplicatia cauta ce trasee contin X si Y.
-Aplicatia calculeaza costul fiecarui drum de la X la Y din aceste trasee si returneaza traseul cu cel mai ieftin drum.
-Aplicatia cauta o cursa ce contine traseul selectat si o returneaza clientului.
-
-
-Needs: Tabel nou cu costul muchiilor.
+Functia FindFastestRide(X, Y):
+    Clientul cere ruta cea mai rapida de la X la Y.
+    Aplicatia cauta ce trasee contin X si Y.
+    Aplicatia calculeaza costul fiecarui drum de la X la Y din aceste trasee si returneaza traseul cu cel mai ieftin drum.
+    Aplicatia cauta o cursa ce contine traseul selectat si o returneaza clientului.
+    ( Daca traseul cursei sare peste o statie dintre X si Y, aceasta trebuie luata in calcul la cost )
+    Needs: Tabel nou cu costul muchiilor.
