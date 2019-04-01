@@ -30,6 +30,9 @@ create table clienti(
   id_clienti INT NOT NULL PRIMARY KEY,
   nr_telefon int NOT NULL,
   email VARCHAR2(40),
+  id_cursa int,
+      FOREIGN KEY (id_statie_to) REFERENCES statii(id_statii),
+
   cnp int NOT NULL,
   created_at DATE,
   updated_at DATE
