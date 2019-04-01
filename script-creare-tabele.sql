@@ -24,13 +24,13 @@ create TABLE soferi(
 /
 
 create table clienti(
-  nume VARCHAR2(15) NOT NULL,
-  prenume VARCHAR2(30) NOT NULL,
+  nume VARCHAR2(50) NOT NULL,
+  prenume VARCHAR2(50) NOT NULL,
   fonduri int,
   id_clienti INT NOT NULL PRIMARY KEY,
-  nr_telefon	int NOT NULL,
+  nr_telefon int NOT NULL,
   email VARCHAR2(40),
-  cnp int) NOT NULL,
+  cnp int NOT NULL,
   created_at DATE,
   updated_at DATE
 );

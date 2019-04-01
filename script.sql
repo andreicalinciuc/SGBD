@@ -17,7 +17,49 @@ TYPE varr IS VARRAY(1000) OF varchar2(255);
     
     begin
     
-       FOR v_i IN 1..1025 LOOP
+      
+
+    FOR v_i IN 1..2000 LOOP
+             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0,lista_nume.count))+1);
+      IF (DBMS_RANDOM.VALUE(0,100)<50) THEN      
+         v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0,lista_prenume_fete.count))+1);
+         LOOP
+            v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0,lista_prenume_fete.count))+1);
+            exit when v_prenume1<>v_prenume2;
+         END LOOP;
+       ELSE
+         v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0,lista_prenume_baieti.count))+1);
+         LOOP
+            v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0,lista_prenume_baieti.count))+1);
+            exit when v_prenume1<>v_prenume2;
+         END LOOP;       
+       END IF;
+     
+     IF (DBMS_RANDOM.VALUE(0,100)<60) THEN  
+        IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
+          v_prenume := v_prenume1 || ' ' || v_prenume2;
+        END IF;
+        else 
+           v_prenume:=v_prenume1;
+      END IF; 
+
+       
+        IF (DBMS_RANDOM.VALUE(0,100)<10) THEN
+                v_cnp := DBMS_RANDOM.VALUE(1,2)*1000000000 + DBMS_RANDOM.VALUE(1,999999999);
+                else
+                v_cnp :=DBMS_RANDOM.VALUE(1,2)*1000000000 + DBMS_RANDOM.VALUE(1,999999999);
+          END IF;
+
+     v_nr_telefon := DBMS_RANDOM.VALUE(700000000,799999999);
+
+    insert into soferi values (v_nume,v_prenume,v_nr_telefon,v_i,v_cnp,sysdate,sysdate);
+
+       END LOOP;
+       
+                 DBMS_OUTPUT.PUT_LINE('Inserarea a 1025 soferi... GATA !');
+
+       
+        FOR v_i IN 1..2000 LOOP
              v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0,lista_nume.count))+1);
       IF (DBMS_RANDOM.VALUE(0,100)<50) THEN      
          v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0,lista_prenume_fete.count))+1);
@@ -43,19 +85,30 @@ TYPE varr IS VARRAY(1000) OF varchar2(255);
 
         v_fonduri := '';
       IF (DBMS_RANDOM.VALUE(0,100)<10) THEN
-         v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0,10))*100 + 500;
+         v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0,10))*10 + 50;
+         else
+         v_fonduri := 100;
       END IF;
       
-      if (TRUNC(DBMS_RANDOM.VALUE(0,2))=0) then v_email := v_email ||'@gmail.com';
-         else v_email := v_email ||'@info.ro';
-      end if;
-              insert into clienti values (v_nume,v_prenume,v_fonduri,v_i,'1234560','daas@yahoo.com','127890',sysdate,sysdate);
-          DBMS_OUTPUT.PUT_LINE('Inserarea a 1025 studenti... GATA !');
+           IF (DBMS_RANDOM.VALUE(0,100)<10) THEN
+                v_cnp := DBMS_RANDOM.VALUE(1,2)*1000000000 + DBMS_RANDOM.VALUE(1,999999999);
+                else
+                v_cnp :=DBMS_RANDOM.VALUE(1,2)*1000000000 + DBMS_RANDOM.VALUE(1,999999999);
+          END IF;
+
+     
+
+    insert into clienti values (v_nume,v_prenume,v_fonduri,v_i,'1234560','email',v_cnp,sysdate,sysdate);
+
+       END LOOP;
+          DBMS_OUTPUT.PUT_LINE('Inserarea a 1025 clienti... GATA !');
+
+        FOR v_i IN 1..2000 LOOP
 
 
        END LOOP;
 
-       
+
        end;
 
 
