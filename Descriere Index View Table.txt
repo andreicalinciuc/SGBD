@@ -1,0 +1,24 @@
+Tabel Clienti:
+    Memoreaza datele clientilor si cursa in care se afla (Sau NULL)
+Tabel Soferi:
+    Memoreaza datele soferilor
+Tabel Depou:
+    Memoreaza toate depourile si locatia lor
+Tabel Vehicule_depou:
+    Memoreaza toate vehiculele si depoul in care se afla
+Tabel Statii:
+    Memoreaza toate statiile existente
+Tabel Trasee:
+    Memoreaza toate traseele existente
+Tabel Trasee_statii:
+    Memoreaza toate 'muchiile' dintre statiile existente care formeaza impreuna un traseu. (Contine 1 FK Trasee, 2 FK Statii)
+Tabel Distanta_statii:
+    Memoreaza distanta dintre statiile adiacente. (Contine 2 FK Statii)
+Tabel Curse:
+    Memoreaza cursele pornite cu un sofer si un traseu, folosind un vehicul din depou.
+
+Index id_statie_from in Trasee_statii
+Index id_statie_to in Trasee_statii
+Index Nume in Trasee
+Index id_statie_from in Distanta_statii
+Index id_statie_to in Distanta_statii
