@@ -14,6 +14,7 @@ TYPE varr IS VARRAY(1000) OF varchar2(255);
     v_nr_telefon int;
     v_email varchar2(255);
     v_cnp int;
+    id_cursa int;
     
     begin
     
@@ -96,18 +97,17 @@ TYPE varr IS VARRAY(1000) OF varchar2(255);
                 v_cnp :=DBMS_RANDOM.VALUE(1,2)*1000000000 + DBMS_RANDOM.VALUE(1,999999999);
           END IF;
 
-     
+     id_cursa := DBMS_RANDOM.VALUE(1,2000);
 
-    insert into clienti values (v_nume,v_prenume,v_fonduri,v_i,'1234560','email',v_cnp,sysdate,sysdate);
-
-       END LOOP;
-          DBMS_OUTPUT.PUT_LINE('Inserarea a 1025 clienti... GATA !');
-
-        FOR v_i IN 1..2000 LOOP
-         
+    insert into clienti values (v_nume,v_prenume,v_fonduri,v_i,'1234560','email',v_cnp,sysdate,sysdate,NULL);
 
        END LOOP;
+          DBMS_OUTPUT.PUT_LINE('Inserarea a 2000 clienti... GATA !');
 
+    FOR v_i IN 1..2000 LOOP
+
+
+  END LOOP;
 
        end;
 

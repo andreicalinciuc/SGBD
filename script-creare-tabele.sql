@@ -21,22 +21,6 @@ create TABLE soferi(
   updated_at DATE
 
 );
-/
-
-create table clienti(
-  nume VARCHAR2(50) NOT NULL,
-  prenume VARCHAR2(50) NOT NULL,
-  fonduri int,
-  id_clienti INT NOT NULL PRIMARY KEY,
-  nr_telefon int NOT NULL,
-  email VARCHAR2(40),
-  id_cursa int,
-      FOREIGN KEY (id_statie_to) REFERENCES statii(id_statii),
-
-  cnp int NOT NULL,
-  created_at DATE,
-  updated_at DATE
-);
 
 /
 CREATE TABLE depou(
@@ -53,6 +37,9 @@ CREATE TABLE vehicule_depou(
    id_vehicule_depou INT NOT NULL PRIMARY KEY,
    capacitate_pasageri NUMBER(3,0) NOT NULL,
    stare number(1) NOT NULL,
+   id_depou int,
+    CONSTRAINT fk_depou_veh FOREIGN KEY (id_depou)
+      REFERENCES depou (id_depou),
   created_at DATE,
   updated_at DATE       
 );
@@ -101,3 +88,18 @@ id_soferi int,
  updated_at DATE 
 );
 /
+
+create table clienti(
+  nume VARCHAR2(15) NOT NULL,
+  prenume VARCHAR2(30) NOT NULL,
+  fonduri int,
+  id_clienti INT NOT NULL PRIMARY KEY,
+  nr_telefon	NUMBER(10,0) NOT NULL,
+  email VARCHAR2(40),
+  cnp NUMBER(10,0) NOT NULL,
+  created_at DATE,
+  updated_at DATE,
+  id_cursa INT,
+  CONSTRAINT fk_client_cursa_id FOREIGN KEY (id_cursa)
+      REFERENCES curse (ID_curse)
+);
