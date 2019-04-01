@@ -104,7 +104,7 @@ TYPE varr IS VARRAY(1000) OF varchar2(255);
           DBMS_OUTPUT.PUT_LINE('Inserarea a 1025 clienti... GATA !');
 
         FOR v_i IN 1..2000 LOOP
-
+         
 
        END LOOP;
 
