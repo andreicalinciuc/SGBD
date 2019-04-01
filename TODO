@@ -5,7 +5,7 @@ Andrei:
 Radu:
     ✔ ne povestiti ce vreti sa fac aplicatia si care sunt caracteristicle sale (e.g. facem conturi / verificam parole / vindem pinguini) @done(19-03-30 15:28)
     ✔ sa aveti o lista cu functiile si procedurile pe care le veti utiliza (pentru a putea fi vizibil gradul de complexitate al proiectului) si o descriere succinta a fiecareia. @started(19-03-31 13:00) @done(19-03-31 17:30) @lasted(4h30m7s)
-    ☐ sa descrieti si motivati utilitatea fiecarei structuri de date ce o utilizati sau o veti utiliza (indecsi, views, tabele)
+    ✔ sa descrieti si motivati utilitatea fiecarei structuri de date ce o utilizati sau o veti utiliza (indecsi, views, tabele) @started(19-04-01 08:10) @done(19-04-01 08:45) @lasted(35m44s)
 
 Not assigned:
     ☐ sa fiti capabili sa spuneti in ce forma normala este baza de date (2NF, 3NF, BCNF, 4NF) si care este motivatia pentru care sustineti ca este in acea forma normala (fara demonstratie acest subpunct nu va fi notat).
