@@ -6,6 +6,7 @@ DROP TABLE vehicule_depou CASCADE CONSTRAINTS;
 DROP TABLE statii CASCADE CONSTRAINTS;
 DROP TABLE trasee CASCADE CONSTRAINTS;
 DROP TABLE trasee_statii CASCADE CONSTRAINTS;
+DROP TABLE costuri_muchii CASCADE CONSTRAINTS;
 
 
 
@@ -71,7 +72,7 @@ CREATE TABLE trasee_statii(
     FOREIGN KEY (id_traseu) REFERENCES trasee(id_trasee),
     FOREIGN KEY (id_statie_from) REFERENCES statii(id_statii),
     FOREIGN KEY (id_statie_to) REFERENCES statii(id_statii),
-    CONSTRAINT no_duplicates UNIQUE (id_statie_from, id_statie_to),
+    CONSTRAINT no_duplicate_muchii_statii UNIQUE (id_statie_from, id_statie_to),
 
     created_at DATE,
     updated_at DATE 
@@ -103,3 +104,15 @@ create table clienti(
   CONSTRAINT fk_client_cursa_id FOREIGN KEY (id_cursa)
       REFERENCES curse (ID_curse)
 );
+/
+
+CREATE TABLE costuri_muchii(
+    id_nod_from INT,
+    id_nod_to INT,
+    cost_muchie INT,
+    primary key (id_nod_from, id_nod_to),
+    created_at DATE,
+    updated_at DATE
+
+);
+/
