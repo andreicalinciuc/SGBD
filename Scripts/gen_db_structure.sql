@@ -116,3 +116,15 @@ CREATE TABLE costuri_muchii(
 
 );
 /
+
+CREATE TABLE shortest_paths(
+    id_nod_from INT,
+    id_nod_to INT,
+    cost_muchie INT,
+    parent_node INT,
+    primary key (id_nod_from, id_nod_to),
+    created_at DATE,
+    updated_at DATE
+
+);
+/

@@ -28,7 +28,7 @@ end;
 /
 set serveroutput on;
 declare
-    v_nodes integer := 100000;
+    v_nodes integer := 1500;
     v_edges integer := 1000000;
 begin
     generate_nodes_and_edges(v_nodes, v_edges);
