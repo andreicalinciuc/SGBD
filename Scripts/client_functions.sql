@@ -22,4 +22,4 @@ end get_active_routes;
 
 /
 set serveroutput on;
-print('test');
+select * from table(select get_active_routes() from dual);
