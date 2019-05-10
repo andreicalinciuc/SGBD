@@ -1,7 +1,13 @@
 -- Functie GetTraseeActive():
 --     Returneaza o lista cu traseele pe care circula macar un vehicul.
-
-
+create or replace function get_active_routes
+return int_list
+is
+route_ids int_list;
+begin
+  select distinct id_traseu bulk collect into route_ids from curse;
+  return(route_ids);
+end get_active_routes;
 -- Functie GetTraseuVehicul():
 --     Returneaza o lista cu statiile prin care trece un vehicul.
 
@@ -14,3 +20,6 @@
 --     ( Daca traseul cursei sare peste o statie dintre from_station si to_station, aceasta trebuie luata in calcul la cost )
 --     Needs: Tabel nou cu costul muchiilor.
 
+/
+set serveroutput on;
+print('test');
