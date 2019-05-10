@@ -1,3 +1,18 @@
+DROP TABLE shortest_paths CASCADE CONSTRAINTS;
+/
+
+CREATE TABLE shortest_paths(
+    id_nod_from INT,
+    id_nod_to INT,
+    cost_muchie INT,
+    parent_node INT,
+    primary key (id_nod_from, id_nod_to),
+    created_at DATE,
+    updated_at DATE
+
+);
+/
+
 create or replace procedure generate_floyd_warshall_paths(
   vertices integer
   ) as
@@ -35,6 +50,8 @@ begin
   end loop;
 end;
 /
+
+
 
 declare
   vertices integer;
