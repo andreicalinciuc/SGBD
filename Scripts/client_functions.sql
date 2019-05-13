@@ -9,6 +9,7 @@ begin
   return(route_ids);
 end get_active_routes;
 /
+
 -- Functie GetTraseuVehicul():
 --     Returneaza o lista cu statiile prin care trece un vehicul.
 create or replace function get_traseu_cursa
@@ -22,7 +23,6 @@ begin
 end get_traseu_cursa;
 /
 
-
 -- Functie FindFastestRide(from_station, to_station):
 --     Clientul cere ruta cea mai rapida de la from_station la to_station.
 --     Aplicatia cauta ce trasee contin from_station si to_station.
@@ -30,7 +30,28 @@ end get_traseu_cursa;
 --     Aplicatia cauta o cursa ce contine traseul selectat si o returneaza clientului.
 --     ( Daca traseul cursei sare peste o statie dintre from_station si to_station, aceasta trebuie luata in calcul la cost )
 --     Needs: Tabel nou cu costul muchiilor.
+create or replace function get_fastest_ride
+( from_station integer, to_station integer )
+return integer
+is
+node_ids int_list;
+begin
+  return(1);
+end get_fastest_ride;
 /
-set serveroutput on;
+
+create or replace function get_fastest_ride_duration
+( from_station integer, to_station integer )
+return integer
+is
+node_ids int_list;
+begin
+  return(2);
+end get_fastest_ride_duration;
+/
+
+
 select * from table(select get_active_routes() from dual);
 select * from table(select get_traseu_cursa(3) from dual);
+select get_fastest_ride(3, 5) from dual;
+select get_fastest_ride_duration(3, 5) from dual;

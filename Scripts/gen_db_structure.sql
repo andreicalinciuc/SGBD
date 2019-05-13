@@ -123,25 +123,40 @@ insert into trasee (id, nume, created_at, updated_at) values (2, 'test2', sysdat
 insert into trasee (id, nume, created_at, updated_at) values (3, 'test3', sysdate, sysdate);
 
 insert into trasee_statii values (1, 1, 1, 2, sysdate, sysdate);
-insert into costuri_muchii values (1, 1, 2, 5, sysdate, sysdate);
 insert into trasee_statii values (2, 1, 2, 3, sysdate, sysdate);
-insert into costuri_muchii values (2, 2, 3, 5, sysdate, sysdate);
 insert into trasee_statii values (3, 1, 3, 4, sysdate, sysdate);
-insert into costuri_muchii values (3, 3, 4, 5, sysdate, sysdate);
 insert into trasee_statii values (4, 1, 4, 1, sysdate, sysdate);
-insert into costuri_muchii values (4, 4, 1, 5, sysdate, sysdate);
 insert into trasee_statii values (5, 2, 1, 3, sysdate, sysdate);
-insert into costuri_muchii values (5, 1, 3, 5, sysdate, sysdate);
 insert into trasee_statii values (6, 2, 3, 4, sysdate, sysdate);
-insert into costuri_muchii values (6, 3, 4, 5, sysdate, sysdate);
 insert into trasee_statii values (7, 2, 4, 2, sysdate, sysdate);
-insert into costuri_muchii values (7, 4, 2, 5, sysdate, sysdate);
 insert into trasee_statii values (8, 2, 2, 1, sysdate, sysdate);
-insert into costuri_muchii values (8, 2, 1, 5, sysdate, sysdate);
 insert into trasee_statii values (9, 3, 1, 5, sysdate, sysdate);
-insert into costuri_muchii values (9, 1, 5, 5, sysdate, sysdate);
 insert into trasee_statii values (10, 3, 5, 1, sysdate, sysdate);
-insert into costuri_muchii values (10, 5, 1, 5, sysdate, sysdate);
+
+insert into costuri_muchii values (1, 1, 2, 5, sysdate, sysdate);
+insert into costuri_muchii values (2, 1, 3, 5, sysdate, sysdate);
+insert into costuri_muchii values (3, 1, 4, 5, sysdate, sysdate);
+insert into costuri_muchii values (4, 1, 5, 5, sysdate, sysdate);
+
+insert into costuri_muchii values (5, 2, 1, 5, sysdate, sysdate);
+insert into costuri_muchii values (6, 2, 3, 5, sysdate, sysdate);
+insert into costuri_muchii values (7, 2, 4, 5, sysdate, sysdate);
+insert into costuri_muchii values (8, 2, 5, 5, sysdate, sysdate);
+
+insert into costuri_muchii values (9, 3, 1, 5, sysdate, sysdate);
+insert into costuri_muchii values (10, 3, 2, 5, sysdate, sysdate);
+insert into costuri_muchii values (11, 3, 4, 5, sysdate, sysdate);
+insert into costuri_muchii values (12, 3, 5, 5, sysdate, sysdate);
+
+insert into costuri_muchii values (13, 4, 1, 5, sysdate, sysdate);
+insert into costuri_muchii values (14, 4, 2, 5, sysdate, sysdate);
+insert into costuri_muchii values (15, 4, 3, 5, sysdate, sysdate);
+insert into costuri_muchii values (16, 4, 5, 5, sysdate, sysdate);
+
+insert into costuri_muchii values (17, 5, 1, 5, sysdate, sysdate);
+insert into costuri_muchii values (18, 5, 2, 5, sysdate, sysdate);
+insert into costuri_muchii values (19, 5, 3, 5, sysdate, sysdate);
+insert into costuri_muchii values (20, 5, 4, 5, sysdate, sysdate);
 
 insert into soferi values (1, 'test', 'ptest', 0552, 19852123, sysdate, sysdate);
 insert into depou values (1, 'test', 60, sysdate, sysdate);
