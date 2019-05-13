@@ -9,7 +9,7 @@ DROP TABLE trasee_statii CASCADE CONSTRAINTS;
 DROP TABLE costuri_muchii CASCADE CONSTRAINTS;
 /
 
-CREATE OR REPLACE type int_list is table of integer;
+CREATE OR REPLACE type int_list is varray(1000) of integer;
 /
 
 create TABLE soferi(
@@ -62,13 +62,14 @@ CREATE TABLE trasee(
 /
 
 CREATE TABLE trasee_statii(
+  id int primary key,
   id_traseu INT NOT NULL,
   id_statie_from INT NOT NULL,
   id_statie_to INT NOT NULL,
   FOREIGN KEY (id_traseu) REFERENCES trasee(id),
   FOREIGN KEY (id_statie_from) REFERENCES statii(id),
   FOREIGN KEY (id_statie_to) REFERENCES statii(id),
-  primary key (id_traseu, id_statie_from, id_statie_to),
+  constraint trasee_uniqueness unique (id_traseu, id_statie_from, id_statie_to),
   created_at DATE,
   updated_at DATE 
 );
@@ -101,12 +102,13 @@ create table clienti(
 /
 
 CREATE TABLE costuri_muchii(
+    id int primary key,
     id_nod_from INT,
     id_nod_to INT,
     cost_muchie INT,
     created_at DATE,
     updated_at DATE,
-    primary key (id_nod_from, id_nod_to)
+    constraint costuri_muchii_uniqueness unique (id_nod_from, id_nod_to)
 );
 /
 
@@ -120,20 +122,31 @@ insert into trasee (id, nume, created_at, updated_at) values (1, 'test1', sysdat
 insert into trasee (id, nume, created_at, updated_at) values (2, 'test2', sysdate, sysdate);
 insert into trasee (id, nume, created_at, updated_at) values (3, 'test3', sysdate, sysdate);
 
-insert into trasee_statii values (1, 1, 2, sysdate, sysdate);
-insert into trasee_statii values (1, 2, 3, sysdate, sysdate);
-insert into trasee_statii values (1, 3, 4, sysdate, sysdate);
-insert into trasee_statii values (1, 4, 1, sysdate, sysdate);
-insert into trasee_statii values (2, 1, 3, sysdate, sysdate);
-insert into trasee_statii values (2, 3, 4, sysdate, sysdate);
-insert into trasee_statii values (2, 4, 2, sysdate, sysdate);
-insert into trasee_statii values (2, 2, 1, sysdate, sysdate);
-insert into trasee_statii values (3, 1, 5, sysdate, sysdate);
-insert into trasee_statii values (3, 5, 1, sysdate, sysdate);
+insert into trasee_statii values (1, 1, 1, 2, sysdate, sysdate);
+insert into costuri_muchii values (1, 1, 2, 5, sysdate, sysdate);
+insert into trasee_statii values (2, 1, 2, 3, sysdate, sysdate);
+insert into costuri_muchii values (2, 2, 3, 5, sysdate, sysdate);
+insert into trasee_statii values (3, 1, 3, 4, sysdate, sysdate);
+insert into costuri_muchii values (3, 3, 4, 5, sysdate, sysdate);
+insert into trasee_statii values (4, 1, 4, 1, sysdate, sysdate);
+insert into costuri_muchii values (4, 4, 1, 5, sysdate, sysdate);
+insert into trasee_statii values (5, 2, 1, 3, sysdate, sysdate);
+insert into costuri_muchii values (5, 1, 3, 5, sysdate, sysdate);
+insert into trasee_statii values (6, 2, 3, 4, sysdate, sysdate);
+insert into costuri_muchii values (6, 3, 4, 5, sysdate, sysdate);
+insert into trasee_statii values (7, 2, 4, 2, sysdate, sysdate);
+insert into costuri_muchii values (7, 4, 2, 5, sysdate, sysdate);
+insert into trasee_statii values (8, 2, 2, 1, sysdate, sysdate);
+insert into costuri_muchii values (8, 2, 1, 5, sysdate, sysdate);
+insert into trasee_statii values (9, 3, 1, 5, sysdate, sysdate);
+insert into costuri_muchii values (9, 1, 5, 5, sysdate, sysdate);
+insert into trasee_statii values (10, 3, 5, 1, sysdate, sysdate);
+insert into costuri_muchii values (10, 5, 1, 5, sysdate, sysdate);
 
 insert into soferi values (1, 'test', 'ptest', 0552, 19852123, sysdate, sysdate);
 insert into depou values (1, 'test', 60, sysdate, sysdate);
 insert into vehicule_depou values (1, 30, 1, 1, sysdate, sysdate);
 insert into curse values (1, 1, 1, sysdate, sysdate);
-insert into curse values (2, 1, 1, sysdate, sysdate);
+insert into curse values (2, 3, 1, sysdate, sysdate);
 insert into curse values (3, 2, 1, sysdate, sysdate);
+insert into curse values (4, 2, 1, sysdate, sysdate);
