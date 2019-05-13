@@ -8,8 +8,19 @@ begin
   select distinct id_traseu bulk collect into route_ids from curse;
   return(route_ids);
 end get_active_routes;
+/
 -- Functie GetTraseuVehicul():
 --     Returneaza o lista cu statiile prin care trece un vehicul.
+create or replace function get_traseu_cursa
+( cursa_id integer )
+return int_list
+is
+node_ids int_list;
+begin
+  select id_statie_from bulk collect into node_ids from trasee_statii where id_traseu = (select id_traseu from curse where id = cursa_id) order by trasee_statii.id;
+  return(node_ids);
+end get_traseu_cursa;
+/
 
 
 -- Functie FindFastestRide(from_station, to_station):
@@ -19,7 +30,7 @@ end get_active_routes;
 --     Aplicatia cauta o cursa ce contine traseul selectat si o returneaza clientului.
 --     ( Daca traseul cursei sare peste o statie dintre from_station si to_station, aceasta trebuie luata in calcul la cost )
 --     Needs: Tabel nou cu costul muchiilor.
-
 /
 set serveroutput on;
 select * from table(select get_active_routes() from dual);
+select * from table(select get_traseu_cursa(3) from dual);
