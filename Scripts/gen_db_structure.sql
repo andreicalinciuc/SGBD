@@ -10,8 +10,6 @@ DROP TABLE costuri_muchii CASCADE CONSTRAINTS;
 /
 
 CREATE OR REPLACE type int_list is varray(1000) of integer;
-CREATE OR REPLACE type dict is table of integer
-  index by varchar(64);
 /
 
 create TABLE soferi(
