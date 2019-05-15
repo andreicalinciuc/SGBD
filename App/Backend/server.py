@@ -1,29 +1,32 @@
 from flask import Flask
 from flask import request
-import db
+from db import DB
+
+test = DB()
+print test.get_active_routes()
+print test.get_traseu_cursa(3)
 
 app = Flask(__name__)
 
 @app.route("/", methods = ["GET"])
 def get_all_tasks():
-    return db.getAll()
+    pass
 
 @app.route("/<id>", methods = ["GET"])
 def get_task_by_id(task_id):
-    return db.getById(task_id)
+    pass
 
 @app.route("/", methods = ["POST"])
 def add_assignement():
-    return db.post_assignement(request.get_json())
+    pass
 
 @app.route("/", methods = ["PUT"])
 def update_assignement():
-    return db.put_assignement(request.get_json())
+    pass
 
 @app.route("/", methods = ["DELETE"])
-def update_assignement():
-    return db.put_assignement(request.get_json())
-
+def delete_assignment():
+    pass
 
 
 if __name__ == "__main__":
