@@ -26,11 +26,6 @@ BEGIN
         loop
             dbms_output.put_line(v_line.ID_TRASEU);
         end loop;
-
-    /*   DELETE
-       FROM SOFERI
-       WHERE ID = id_driver;*/
-
 END DeleteStation;
 
 
@@ -118,10 +113,31 @@ END;
 from TRASEE_STATII;*/
 
 
--- Procedura StartRide(vehicul, sofer, traseu), FinishRide(vehicul):
+-- Procedura StartRide(vehicul,sofer, traseu), FinishRide(vehicul):
 --     Adauga o cursa folosind un vehicul, un sofer si un traseu.
+
+CREATE OR REPLACE PROCEDURE Addcourse(vehicul in number,sofer IN NUMBER, traseu IN NUMBER) AS
+    v_id number;
+BEGIN
+    select count(*) into v_id from CURSE;
+    if (v_id < 1) then
+        INSERT INTO CURSE(id, id_traseu, id_soferi,ID_VEHICUL) VALUES ('1', traseu, sofer,vehicul);
+
+    else
+        INSERT INTO CURSE(id, id_traseu, id_soferi,ID_VEHICUL)
+        VALUES ((SELECT max(ID_TRASEU) + 1 from CURSE), traseu, sofer,vehicul);
+    end if;
+    UPDATE VEHICULE_DEPOU set  STARE= '1' where id=vehicul;
+
+END Addcourse;
+
 --     Incheie cursa, eliberand vehiculul si soferul.
 
+CREATE OR REPLACE PROCEDURE Endcourse(vehicul in number) AS
+BEGIN
+        DELETE from CURSE where ID_VEHICUL = vehicul;
+        UPDATE VEHICULE_DEPOU set  STARE= '0' where id=vehicul;
+END Endcourse;
 
 -- Procedura PassangerIn(passanger, cursa), PassengerOut(passanger, cursa):
 --     Inregistreaza pasagerul cand urca/coboara in/din cursa.

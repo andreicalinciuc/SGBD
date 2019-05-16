@@ -79,8 +79,11 @@ CREATE TABLE curse(
   id INT NOT NULL PRIMARY KEY,
   id_traseu int,
   id_soferi int,
+  id_vehicul int,
   FOREIGN KEY (id_traseu) REFERENCES trasee(id),
   FOREIGN KEY (id_soferi) REFERENCES soferi(id),
+  FOREIGN KEY (id_vehicul) REFERENCES vehicule_depou(id),
+
   created_at DATE,
   updated_at DATE 
 );
