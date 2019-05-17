@@ -156,6 +156,7 @@ insert into costuri_muchii values (14, 4, 2, 5, sysdate, sysdate);
 insert into costuri_muchii values (15, 4, 3, 5, sysdate, sysdate);
 insert into costuri_muchii values (16, 4, 5, 5, sysdate, sysdate);
 
+
 insert into costuri_muchii values (17, 5, 1, 5, sysdate, sysdate);
 insert into costuri_muchii values (18, 5, 2, 5, sysdate, sysdate);
 insert into costuri_muchii values (19, 5, 3, 5, sysdate, sysdate);
