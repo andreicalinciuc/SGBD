@@ -86,15 +86,30 @@ END AddVehicle;
 
 CREATE OR REPLACE PROCEDURE DeleteVehicle(id_vehicle IN number)
     IS
+    v_id number;
 BEGIN
+    SELECT id into v_id from VEHICULE_DEPOU where id = id_vehicle;
+
+    if v_id = NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
     DELETE from VEHICULE_DEPOU where ID = id_vehicle;
 END DeleteVehicle;
 
 
 
 --     Muta un vehicul dintr-un depou in altul.
-CREATE OR REPLACE PROCEDURE MoveVehicle(id_vehicul in number, id_depou) AS
+CREATE OR REPLACE PROCEDURE MoveVehicle(id_vehicul in number, id_depou in number) AS
+    v_id number;
 BEGIN
+
+    SELECT id into v_id from VEHICULE_DEPOU where id = id_vehicul;
+
+    if v_id = NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
     UPDATE VEHICULE_DEPOU set ID_DEPOU= id_depou where ID = id_vehicul;
 END MoveVehicle;
 
@@ -141,26 +156,51 @@ END AddCursa;
 --     Incheie cursa, eliberand vehiculul si soferul.
 
 CREATE OR REPLACE PROCEDURE EndCursa(vehicul in number) AS
+    v_id number;
 BEGIN
+    SELECT id into v_id from CURSE where id = vehicul;
+
+    if v_id = NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
     DELETE from CURSE where ID_VEHICUL = vehicul;
     UPDATE VEHICULE_DEPOU set STARE= '0' where id = vehicul;
 END EndCursa;
 
 -- Procedura PassangerIn(passanger, cursa):
 CREATE OR REPLACE PROCEDURE PassagerIn(id_pasager in number, v_id_cursa in number) AS
+    v_id    number;
+    v_cursa number;
 BEGIN
 
-    UPDATE CLIENTI set ID_CURSA= v_id_cursa where ID_CLIENTI = id_pasager;
+    SELECT ID_CURSA into v_cursa from CLIENTI where ID_CURSA = v_id_cursa;
+    SELECT ID into v_id from CLIENTI where ID = id_pasager;
+
+
+    if v_id is NULL or v_cursa is NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
+
+    UPDATE CLIENTI set ID_CURSA= v_id_cursa where ID = id_pasager;
 END PassagerIn;
 
 
 --PassengerOut(passanger):
 
 CREATE OR REPLACE PROCEDURE PassagerOut(id_pasager in number) AS
+    v_id number;
 BEGIN
-    UPDATE CLIENTI set ID_CURSA= NULL where ID_CLIENTI = id_pasager;
+
+    SELECT ID into v_id from CLIENTI where ID = id_pasager;
+    if v_id is NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
+    UPDATE CLIENTI set ID_CURSA= NULL where ID = id_pasager;
 END PassagerOut;
 
 BEGIN
-AddDriver('test', 'test', '0737555666', '1983234556652');
+    AddDriver('test', 'test', '0737555666', '1983234556652');
 END;
