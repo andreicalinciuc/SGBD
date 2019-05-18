@@ -6,7 +6,7 @@ DB_CONFIG = {
 "username": "STUDENT",
 "password": "STUDENT",
 "address": "localhost",
-"database": "orcl.local"
+"database": "XE"
 }
 
 try:
@@ -39,7 +39,7 @@ available_procedures = [
     "DeleteVehicle",
     "MoveVehicle",
     "AddTraseu",
-    "AddCursa",
+    "StartCursa",
     "EndCursa",
     "PassagerIn",
     "PassagerOut"

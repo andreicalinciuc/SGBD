@@ -11,23 +11,65 @@ BEGIN
     end if;
 END AddStation;
 
+
 --     Pentru stergerea unei statii din tabela statii si din traseele in care apare, inlocuind automat drumul vechi cu
 --     unul direct intre nodurile adiacente.
 
 CREATE OR REPLACE PROCEDURE DeleteStation(id_station IN number)
     IS
-    cursor c_trase is
+    v_statii_from  INT_LIST;
+    v_statii_to    INT_LIST;
+    v_found_node   INT := 0;
+    v_statii_count int := 1;
+    cursor c_traseu is
         (select unique ID_TRASEU
          from TRASEE_STATII
-         where ID_STATIE_TO = 2
-            or ID_STATIE_FROM = 2);
+         where ID_STATIE_TO = id_station
+            or ID_STATIE_FROM = id_station);
+    cursor c_statii (traseu_id in integer) is
+        (select ID_STATIE_FROM, ID_STATIE_TO from TRASEE_STATII where ID_TRASEU = traseu_id ORDER BY ID);
 BEGIN
-    for v_line in c_trase
+    for v_traseu in c_traseu
         loop
-            dbms_output.put_line(v_line.ID_TRASEU);
+            for v_drum in c_statii(v_traseu.ID_TRASEU)
+                loop
+                    if v_drum.ID_STATIE_TO = id_station or v_drum.ID_STATIE_FROM = id_station then
+                        if v_found_node = 1 then
+                            v_statii_to(v_statii_count) := v_drum.ID_STATIE_TO;
+                            v_found_node := 0;
+                        else
+                            v_statii_from.extend();
+                            v_statii_to.extend();
+                            v_statii_from(v_statii_count) := v_drum.ID_STATIE_FROM;
+                            v_found_node := 1;
+                            continue;
+
+                        end if;
+                    else
+                        v_statii_from.extend();
+                        v_statii_to.extend();
+                        v_statii_to := v_drum.ID_STATIE_TO;
+                        v_statii_from := v_drum.ID_STATIE_FROM;
+                    end if;
+                    v_statii_count := v_statii_count + 1;
+
+                end loop;
+        /*    delete from TRASEE_STATII where ID_TRASEU=v_traseu.ID_TRASEU;
+            insert into TRASEE_STATII ()*/
+
         end loop;
+        for line in 1..v_statii_count
+            loop
+                 DBMS_OUTPUT.put_line(v_statii_from(line) ||' '||  v_statii_to(line));
+            end loop;
+
 END DeleteStation;
 
+
+select ID_STATIE_FROM, ID_STATIE_TO
+from TRASEE_STATII
+where ID_TRASEU = 2
+order by id;
 
 -- Procedura AddStationToTraseu(traseu, from_station, new_station, to_station):
 --     Adauga o statie intre 2 statii ale unui traseu daca exista un drum intre acestea.
@@ -67,6 +109,7 @@ BEGIN
 END DeleteDriver;
 
 
+
 -- Procedura AddVehicle(vehicle, garage), RemoveVehicle(vehicle, garage), MoveVehicle(vehicle, from_garage, to_garage):
 --     Adauga un vehicul intr-un depou. (a se intelege 'cumpara')
 
@@ -81,6 +124,7 @@ BEGIN
         VALUES ((SELECT max(ID) + 1 from VEHICULE_DEPOU), capacitate, stare, id_depou);
     end if;
 END AddVehicle;
+
 
 --     Sterge un vehicul dintr-un depou. (a se intelege 'vinde' sau 'scoatere din functiune')
 
@@ -114,44 +158,43 @@ BEGIN
 END MoveVehicle;
 
 
+
 -- Procedura AddTraseu(from_station, to_station), DeleteTraseu(traseu):
 --     Adauga un traseu intre doua statii, urmand sa fie adaugate statii dupa nevoie folosind AddStationToTraseu.
 --     Sterge un traseu.
 
-CREATE OR REPLACE PROCEDURE AddTraseu(from_station IN NUMBER, to_station IN NUMBER) AS
+CREATE OR REPLACE PROCEDURE AddTraseu(traseu in number, from_station IN NUMBER, to_station IN NUMBER) AS
     v_id number;
 BEGIN
     select count(*) into v_id from TRASEE_STATII;
     if (v_id < 1) then
-        INSERT INTO TRASEE_STATII(ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO) VALUES ('1', from_station, to_station);
+        INSERT INTO TRASEE_STATII(ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO)
+        VALUES ('1', traseu, from_station, to_station);
     else
-        INSERT INTO TRASEE_STATII(ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO)
-        VALUES ((SELECT max(ID_TRASEU) + 1 from TRASEE_STATII), from_station, to_station);
+        INSERT INTO TRASEE_STATII(ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO)
+        VALUES ((SELECT max(ID) + 1 from TRASEE_STATII), traseu, from_station, to_station);
     end if;
 END AddTraseu;
-
-BEGIN
-    AddTraseu(1, 5);
-END;
 
 
 -- Procedura StartRide(vehicul,sofer, traseu), FinishRide(vehicul):
 --     Adauga o cursa folosind un vehicul, un sofer si un traseu.
 
-CREATE OR REPLACE PROCEDURE AddCursa(vehicul in number, sofer IN NUMBER, traseu IN NUMBER) AS
+CREATE OR REPLACE PROCEDURE StartCursa(vehicul in number, sofer IN NUMBER, traseu IN NUMBER) AS
     v_id number;
 BEGIN
     select count(*) into v_id from CURSE;
     if (v_id < 1) then
-        INSERT INTO CURSE(id, id_traseu, id_soferi, ID_VEHICUL) VALUES ('1', traseu, sofer, vehicul);
+        INSERT INTO CURSE(id, id_traseu, id_sofer, ID_VEHICUL) VALUES ('1', traseu, sofer, vehicul);
 
     else
-        INSERT INTO CURSE(id, id_traseu, id_soferi, ID_VEHICUL)
-        VALUES ((SELECT max(ID_TRASEU) + 1 from CURSE), traseu, sofer, vehicul);
+        INSERT INTO CURSE(id, id_traseu, id_sofer, ID_VEHICUL)
+        VALUES ((SELECT max(ID) + 1 from CURSE), traseu, sofer, vehicul);
     end if;
     UPDATE VEHICULE_DEPOU set STARE= '1' where id = vehicul;
 
-END AddCursa;
+END StartCursa;
+
 
 --     Incheie cursa, eliberand vehiculul si soferul.
 
@@ -165,8 +208,8 @@ BEGIN
     end if;
 
     DELETE from CURSE where ID_VEHICUL = vehicul;
-    UPDATE VEHICULE_DEPOU set STARE= '0' where id = vehicul;
 END EndCursa;
+
 
 -- Procedura PassangerIn(passanger, cursa):
 CREATE OR REPLACE PROCEDURE PassagerIn(id_pasager in number, v_id_cursa in number) AS
@@ -201,6 +244,3 @@ BEGIN
     UPDATE CLIENTI set ID_CURSA= NULL where ID = id_pasager;
 END PassagerOut;
 
-BEGIN
-    AddDriver('test', 'test', '0737555666', '1983234556652');
-END;
