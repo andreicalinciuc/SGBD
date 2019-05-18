@@ -2,3 +2,5 @@
 \.idea/
 
 *.pyc
+
+db_login_info\.json
