@@ -57,7 +57,7 @@ def ExecuteProcedure(procedure, args_list):
     print("Procedure '{}' is not in the 'available procedures' list.".format(procedure))
     return False
 
-ExecuteProcedure("AddDriver", ["test", "test", "0737555666", "1983234456652"])
+ExecuteProcedure("AddDriver", ["test", "test", "0737555666", "1983234456252"])
 
 import atexit
 def _atexit(connection):
