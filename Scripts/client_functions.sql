@@ -32,24 +32,21 @@ end get_traseu_cursa;
 --     Aplicatia cauta o cursa ce contine traseul selectat si o returneaza clientului.
 --     Needs: Tabel nou cu costul muchiilor.
 create or replace function get_fastest_ride(from_station integer, to_station integer)
-    return varchar2
+    return int_list
     is
     v_traseu_id   integer;
     v_statii_count integer;
-    v_best_traseu_id integer;
-    v_best_traseu_cost integer;
     v_from_id integer;
     v_to_id integer;
     v_found_from integer;
     v_sum_ride_cost integer;
     v_current_cost integer;
+    v_returned_values int_list := int_list(0, 2147483647);
     cursor c_trasee_active is
         (select unique id_traseu from curse);
     cursor c_statii_traseu (traseu_id in integer) is
         (select id_statie_from, id_statie_to from trasee_statii where id_traseu = traseu_id);
 begin
-    v_best_traseu_id := 0;
-    v_best_traseu_cost := 2147483647;
     open c_trasee_active;
     loop
         fetch c_trasee_active into v_traseu_id;
@@ -72,14 +69,14 @@ begin
                 end if;
             end loop;
             close c_statii_traseu;
-            if v_sum_ride_cost < v_best_traseu_cost then
-                v_best_traseu_cost := v_sum_ride_cost;
-                v_best_traseu_id := v_traseu_id;
+            if v_sum_ride_cost < v_returned_values(2) then
+                v_returned_values(1) := v_traseu_id;
+                v_returned_values(2) := v_sum_ride_cost;
             end if;
         end if;
     end loop;
     close c_trasee_active;
-    return( v_best_traseu_id || ' ' || v_best_traseu_cost );
+    return(v_returned_values);
 end get_fastest_ride;
 /
 

@@ -51,8 +51,15 @@ END AddDriver;
 
 CREATE OR REPLACE PROCEDURE DeleteDriver(id_driver IN number)
     IS
+    v_id int;
 BEGIN
-    DELETE from CURSE where ID_SOFERI = id_driver;
+    SELECT id into v_id from SOFERI where id = id_driver;
+
+    if v_id = NULL then
+        raise NO_DATA_FOUND;
+    end if;
+
+    DELETE from CURSE where ID_SOFER = id_driver;
 
     DELETE
     FROM SOFERI
@@ -116,7 +123,7 @@ END;
 -- Procedura StartRide(vehicul,sofer, traseu), FinishRide(vehicul):
 --     Adauga o cursa folosind un vehicul, un sofer si un traseu.
 
-CREATE OR REPLACE PROCEDURE Addcourse(vehicul in number, sofer IN NUMBER, traseu IN NUMBER) AS
+CREATE OR REPLACE PROCEDURE AddCursa(vehicul in number, sofer IN NUMBER, traseu IN NUMBER) AS
     v_id number;
 BEGIN
     select count(*) into v_id from CURSE;
@@ -129,15 +136,15 @@ BEGIN
     end if;
     UPDATE VEHICULE_DEPOU set STARE= '1' where id = vehicul;
 
-END Addcourse;
+END AddCursa;
 
 --     Incheie cursa, eliberand vehiculul si soferul.
 
-CREATE OR REPLACE PROCEDURE Endcourse(vehicul in number) AS
+CREATE OR REPLACE PROCEDURE EndCursa(vehicul in number) AS
 BEGIN
     DELETE from CURSE where ID_VEHICUL = vehicul;
     UPDATE VEHICULE_DEPOU set STARE= '0' where id = vehicul;
-END Endcourse;
+END EndCursa;
 
 -- Procedura PassangerIn(passanger, cursa):
 CREATE OR REPLACE PROCEDURE PassagerIn(id_pasager in number, v_id_cursa in number) AS
@@ -154,4 +161,6 @@ BEGIN
     UPDATE CLIENTI set ID_CURSA= NULL where ID_CLIENTI = id_pasager;
 END PassagerOut;
 
-
+BEGIN
+DeleteDriver(1);
+END;
