@@ -22,6 +22,7 @@ def ExecuteProcedure(procedure, args_list):
     if procedure in available_procedures:
         try:
             _cursor.callproc(procedure, args_list)
+            _cursor.execute("commit")
         except Exception, e:
             print("Error encountered while executing procedure '{}':\n{}".format(procedure, e))
             return False
@@ -29,7 +30,7 @@ def ExecuteProcedure(procedure, args_list):
     print("Procedure '{}' is not in the 'available procedures' list.".format(procedure))
     return False
 
-ExecuteProcedure("DeleteDriver", [1])
+ExecuteProcedure("AddDriver", ["test", "test", "0737555666", "1983234456652"])
 
 import atexit
 def _atexit(connection):

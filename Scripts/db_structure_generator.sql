@@ -16,8 +16,8 @@ create TABLE soferi(
   id INT NOT NULL PRIMARY KEY,
   nume VARCHAR2(50) NOT NULL,
   prenume VARCHAR2(50) NOT NULL,
-  nr_telefon	NUMBER(10,0) NOT NULL,
-  cnp	NUMBER(13,0) unique NOT NULL,
+  nr_telefon	VARCHAR2(10) NOT NULL,
+  cnp	VARCHAR2(13) unique NOT NULL,
   created_at DATE,
   updated_at DATE
 );
@@ -92,9 +92,9 @@ create table clienti(
   nume VARCHAR2(50) NOT NULL,
   prenume VARCHAR2(50) NOT NULL,
   fonduri int NOT NULL,
-  nr_telefon	NUMBER(10,0) NOT NULL,
+  nr_telefon	VARCHAR2(10) NOT NULL,
   email VARCHAR2(50) NOT NULL,
-  cnp NUMBER(13,0) unique NOT NULL,
+  cnp VARCHAR2(13) unique NOT NULL,
   id_cursa int,
   foreign key (id_cursa) references curse(id),
   created_at DATE,
@@ -160,10 +160,10 @@ insert into costuri_muchii values (18, 5, 2, 5, sysdate, sysdate);
 insert into costuri_muchii values (19, 5, 3, 5, sysdate, sysdate);
 insert into costuri_muchii values (20, 5, 4, 5, sysdate, sysdate);
 
-insert into soferi values (1, 'test', 'ptest', 0737883905, 1980512553456, sysdate, sysdate);
-insert into soferi values (2, 'test', 'ptest', 0737873905, 1980512553457, sysdate, sysdate);
-insert into soferi values (3, 'test', 'ptest', 0737863905, 1980512553458, sysdate, sysdate);
-insert into soferi values (4, 'test', 'ptest', 0737853905, 1980512553459, sysdate, sysdate);
+insert into soferi values (1, 'test', 'ptest', '0737883905', '1980512553456', sysdate, sysdate);
+insert into soferi values (2, 'test', 'ptest', '0737873905', '1980512553457', sysdate, sysdate);
+insert into soferi values (3, 'test', 'ptest', '0737863905', '1980512553458', sysdate, sysdate);
+insert into soferi values (4, 'test', 'ptest', '0737853905', '1980512553459', sysdate, sysdate);
 
 insert into depou values (1, 'test', 60, sysdate, sysdate);
 
@@ -177,7 +177,7 @@ insert into curse values (2, 3, 2, 2, sysdate, sysdate);
 insert into curse values (3, 2, 3, 3, sysdate, sysdate);
 insert into curse values (4, 2, 4, 4, sysdate, sysdate);
 
-insert into clienti values (1, 'test', 'ptest', 0, 0737853905, 'raduradu55@gmail.com', 1980512553451, NULL, sysdate, sysdate);
-insert into clienti values (2, 'test', 'ptest', 0, 0737853905, 'raduradu55@gmail.com', 1980512553452, NULL, sysdate, sysdate);
-insert into clienti values (3, 'test', 'ptest', 0, 0737853905, 'raduradu55@gmail.com', 1980512553453, NULL, sysdate, sysdate);
-insert into clienti values (4, 'test', 'ptest', 0, 0737853905, 'raduradu55@gmail.com', 1980512553454, NULL, sysdate, sysdate);
+insert into clienti values (1, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553451', NULL, sysdate, sysdate);
+insert into clienti values (2, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553452', NULL, sysdate, sysdate);
+insert into clienti values (3, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553453', NULL, sysdate, sysdate);
+insert into clienti values (4, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553454', NULL, sysdate, sysdate);

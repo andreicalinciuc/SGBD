@@ -33,7 +33,7 @@ END DeleteStation;
 --     Adauga o statie intre 2 statii ale unui traseu daca exista un drum intre acestea.
 -- Procedura AddDriver(driver), RemoveDriver(driver):
 
-CREATE OR REPLACE PROCEDURE AddDriver(nume IN VARCHAR, prenume IN VARCHAR, nrTelefon in number, cnp in number) AS
+CREATE OR REPLACE PROCEDURE AddDriver(nume IN VARCHAR, prenume IN VARCHAR, nrTelefon in VARCHAR, cnp in VARCHAR) AS
     v_id number;
 BEGIN
     select count(*) into v_id from SOFERI;
@@ -162,5 +162,5 @@ BEGIN
 END PassagerOut;
 
 BEGIN
-DeleteDriver(1);
+AddDriver('test', 'test', '0737555666', '1983234556652');
 END;
