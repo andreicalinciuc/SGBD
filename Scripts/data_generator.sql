@@ -120,7 +120,9 @@ DECLARE
     lista_statii         INT_LIST := INT_LIST();
     v_count              int;
     v_temp               int;
-
+    lista_soferi         INT_LIST := INT_LIST();
+    lista_vehicule       INT_LIST := INT_LIST();
+    v_id                 int;
 begin
     lista_statii.extend(1000);
     --inserare statii
@@ -260,9 +262,103 @@ begin
 
         END LOOP;
 
+--depou
+
+    FOR v_i IN 1..100
+
+
+        LOOP
+            v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
+            IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
+                v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+                LOOP
+                    v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+                    exit when v_prenume1 <> v_prenume2;
+                END LOOP;
+            ELSE
+                v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+                LOOP
+                    v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+                    exit when v_prenume1 <> v_prenume2;
+                END LOOP;
+            END IF;
+
+            IF (DBMS_RANDOM.VALUE(0, 100) < 60) THEN
+                IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
+                    v_adresa := v_prenume1 || ' ' || v_prenume2 || ' ' || v_i;
+                END IF;
+            else
+                v_adresa := v_prenume1 || ' ' || v_i;
+            END IF;
+
+            insert into DEPOU(id, adresa, capacitate, created_at, updated_at)
+            values (v_i, v_adresa, DBMS_RANDOM.VALUE(1, 50), sysdate, sysdate);
+
+        END LOOP;
+
+--vehicule depou
+
+    FOR v_i IN 1..12000
+        LOOP
+            insert into VEHICULE_DEPOU(id, capacitate_pasageri, stare, id_depou, created_at, updated_at)
+            values (v_i, DBMS_RANDOM.VALUE(1, 50), 'functional', DBMS_RANDOM.VALUE(1, 100), sysdate, sysdate);
+        END LOOP;
+    --curse
+
+      v_count :=1;
+      FOR v_i IN 1..5000
+          LOOP
+              insert into CURSE(id, id_traseu, id_sofer, id_vehicul, created_at, updated_at)
+              values (v_i, DBMS_RANDOM.VALUE(1, 1000),v_i, v_i, sysdate, sysdate);
+          END LOOP;
+
+--clienti
+ for v_i in 1..10000000
+        LOOP
+            v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
+            IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
+                v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+                LOOP
+                    v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+                    exit when v_prenume1 <> v_prenume2;
+                END LOOP;
+            ELSE
+                v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+                LOOP
+                    v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+                    exit when v_prenume1 <> v_prenume2;
+                END LOOP;
+            END IF;
+
+
+            IF (DBMS_RANDOM.VALUE(0, 100) < 60) THEN
+                IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
+                    v_prenume := v_prenume1 || ' ' || v_prenume2;
+                END IF;
+            else
+                v_prenume := v_prenume1;
+            END IF;
+
+            v_fonduri := 0;
+            IF (DBMS_RANDOM.VALUE(0, 100) < 10) THEN
+                v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0, 10)) * 10 + 50;
+            else
+                v_fonduri := 100;
+            END IF;
+
+              iF (DBMS_RANDOM.VALUE(0, 100) < 25) THEN
+                v_cnp := 1 * 1000000000 + v_i;
+            else
+                v_cnp := 2 * 1000000000 + v_i * 51;
+            END IF;
+
+            id_cursa := DBMS_RANDOM.VALUE(1, 2000);
+            select count(*) into v_id from CURSE;
+            insert into clienti(id, nume, prenume, fonduri, nr_telefon, email, cnp, id_cursa, created_at, updated_at)
+            values (v_i, v_nume, v_prenume, 0, '123456', 'email', v_cnp, DBMS_RANDOM.VALUE(1, 1), sysdate, sysdate);
+
+        END LOOP;
 end;
-
-
 
 
 /*    FOR v_i IN 1..2000
@@ -278,46 +374,3 @@ trasee 1000
 vehicule_depou 12000*/
 
 
-/*   LOOP
-       v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
-       IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
-           v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
-           LOOP
-               v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
-               exit when v_prenume1 <> v_prenume2;
-           END LOOP;
-       ELSE
-           v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
-           LOOP
-               v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
-               exit when v_prenume1 <> v_prenume2;
-           END LOOP;
-       END IF;
-
-
-       IF (DBMS_RANDOM.VALUE(0, 100) < 60) THEN
-           IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
-               v_prenume := v_prenume1 || ' ' || v_prenume2;
-           END IF;
-       else
-           v_prenume := v_prenume1;
-       END IF;
-
-       v_fonduri := 0;
-       IF (DBMS_RANDOM.VALUE(0, 100) < 10) THEN
-           v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0, 10)) * 10 + 50;
-       else
-           v_fonduri := 100;
-       END IF;
-
-     iF (DBMS_RANDOM.VALUE(0, 100) < 25) THEN
-           v_cnp := 1 * 1000000000 + v_i;
-       else
-           v_cnp := 2 * 1000000000 + v_i*5431;
-       END IF;
-
-       id_cursa := DBMS_RANDOM.VALUE(1, 2000);
-
-       insert into clienti values ( v_i,v_nume, v_prenume, 0, '1234560', 'email', v_cnp,1, sysdate, sysdate);
-
-   END LOOP;*/

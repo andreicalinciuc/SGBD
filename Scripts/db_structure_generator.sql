@@ -17,7 +17,7 @@ create TABLE soferi(
   nume VARCHAR2(50) NOT NULL,
   prenume VARCHAR2(50) NOT NULL,
   nr_telefon	VARCHAR2(10) NOT NULL,
-  cnp	VARCHAR2(13) unique NOT NULL,
+  cnp	VARCHAR2(15) unique NOT NULL,
   created_at DATE,
   updated_at DATE
 );
@@ -35,7 +35,7 @@ CREATE TABLE depou(
 CREATE TABLE vehicule_depou(
   id INT NOT NULL PRIMARY KEY,
   capacitate_pasageri int NOT NULL,
-  stare number(1) NOT NULL,
+  stare varchar2(50),
   id_depou int,
   foreign key (id_depou) references depou(id),
   created_at DATE,
@@ -94,7 +94,7 @@ create table clienti(
   fonduri int NOT NULL,
   nr_telefon	VARCHAR2(10) NOT NULL,
   email VARCHAR2(50) NOT NULL,
-  cnp VARCHAR2(13) unique NOT NULL,
+  cnp VARCHAR2(15) unique NOT NULL,
   id_cursa int,
   foreign key (id_cursa) references curse(id),
   created_at DATE,
@@ -116,11 +116,7 @@ CREATE TABLE costuri_muchii(
 
 /*
 
-insert into depou values (1, 'test', 60, sysdate, sysdate);
 
-insert into vehicule_depou values (4, 30, 1, 1, sysdate, sysdate);
-
-insert into curse values (4, 2, 4, 4, sysdate, sysdate);
 
 insert into clienti values (4, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553454', NULL, sysdate, sysdate);
 */
