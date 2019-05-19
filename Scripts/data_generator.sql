@@ -90,13 +90,15 @@ DECLARE
     v_cnp                int;
     id_cursa             int;
     v_adresa             varchar2(255);
+    lista_statii         INT_LIST :=INT_LIST();
+    v_count              int;
 
 begin
-
+    lista_statii.extend(1000);
     --inserare statii
-/*      FOR v_i IN 1..10000
-end;
-end;
+      FOR v_i IN 1..10000
+
+
         LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
@@ -122,12 +124,12 @@ end;
             END IF;
 
             v_nume := v_nume || ' ' || v_i;
-            insert into STATII values (v_i, v_nume, v_prenume, sysdate, sysdate);
+            insert into STATII values (v_i, v_nume, v_adresa, sysdate, sysdate);
 
-        END LOOP;*/
+        END LOOP;
 
 --inserare soferi
-/*    FOR v_i IN 1..10000
+    FOR v_i IN 1..10000
         LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
@@ -163,10 +165,10 @@ end;
 
             insert into soferi values (v_i, v_nume, v_prenume, v_nr_telefon, v_cnp, sysdate, sysdate);
 
-        END LOOP;*/
+        END LOOP;
 
 --trasee
-  FOR v_i IN 1..1000
+    FOR v_i IN 1..1000
         LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
@@ -184,13 +186,40 @@ end;
             END IF;
 
 
-             v_nume := v_nume || ' ' || v_i;
-            insert into TRASEE values (v_i, v_nume,sysdate, sysdate);
+            v_nume := v_nume || ' ' || v_i;
+            insert into TRASEE values (v_i, v_nume, sysdate, sysdate);
 
         END LOOP;
 
-end loop;
 
+--trasee statii
+    v_count := 1;
+    FOR v_c in 1..1000
+
+        loop
+            lista_statii(1) := DBMS_RANDOM.VALUE(1, 10000);
+            for v_i in 2..30
+                loop
+                    lista_statii(v_i) := DBMS_RANDOM.VALUE(1, 10000);
+                    while lista_statii(v_i - 1) = lista_statii(v_i) or lista_statii(v_i) = lista_statii(1)
+                        loop
+                            lista_statii(v_i) := DBMS_RANDOM.VALUE(1, 10000);
+                        end loop;
+                end loop;
+                lista_statii(31) := lista_statii(1);
+
+
+            for v_nod in 2..31
+                loop
+                    insert into TRASEE_STATII(id, id_traseu, id_statie_from, id_statie_to, created_at, updated_at)
+                     values (v_count, v_c, lista_statii(v_nod - 1), lista_statii(v_nod), sysdate, sysdate);
+                    v_count := v_count + 1;
+                end loop;
+
+
+        END LOOP;
+
+end;
 
 /*    FOR v_i IN 1..2000
 
@@ -205,46 +234,46 @@ trasee 1000
 vehicule_depou 12000*/
 
 
-     /*   LOOP
-            v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
-            IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
-                v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
-                LOOP
-                    v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
-                    exit when v_prenume1 <> v_prenume2;
-                END LOOP;
-            ELSE
-                v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
-                LOOP
-                    v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
-                    exit when v_prenume1 <> v_prenume2;
-                END LOOP;
-            END IF;
+/*   LOOP
+       v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
+       IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
+           v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+           LOOP
+               v_prenume2 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
+               exit when v_prenume1 <> v_prenume2;
+           END LOOP;
+       ELSE
+           v_prenume1 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+           LOOP
+               v_prenume2 := lista_prenume_baieti(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_baieti.count)) + 1);
+               exit when v_prenume1 <> v_prenume2;
+           END LOOP;
+       END IF;
 
 
-            IF (DBMS_RANDOM.VALUE(0, 100) < 60) THEN
-                IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
-                    v_prenume := v_prenume1 || ' ' || v_prenume2;
-                END IF;
-            else
-                v_prenume := v_prenume1;
-            END IF;
+       IF (DBMS_RANDOM.VALUE(0, 100) < 60) THEN
+           IF LENGTH(v_prenume1 || ' ' || v_prenume2) <= 20 THEN
+               v_prenume := v_prenume1 || ' ' || v_prenume2;
+           END IF;
+       else
+           v_prenume := v_prenume1;
+       END IF;
 
-            v_fonduri := 0;
-            IF (DBMS_RANDOM.VALUE(0, 100) < 10) THEN
-                v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0, 10)) * 10 + 50;
-            else
-                v_fonduri := 100;
-            END IF;
+       v_fonduri := 0;
+       IF (DBMS_RANDOM.VALUE(0, 100) < 10) THEN
+           v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0, 10)) * 10 + 50;
+       else
+           v_fonduri := 100;
+       END IF;
 
-          iF (DBMS_RANDOM.VALUE(0, 100) < 25) THEN
-                v_cnp := 1 * 1000000000 + v_i;
-            else
-                v_cnp := 2 * 1000000000 + v_i*5431;
-            END IF;
+     iF (DBMS_RANDOM.VALUE(0, 100) < 25) THEN
+           v_cnp := 1 * 1000000000 + v_i;
+       else
+           v_cnp := 2 * 1000000000 + v_i*5431;
+       END IF;
 
-            id_cursa := DBMS_RANDOM.VALUE(1, 2000);
+       id_cursa := DBMS_RANDOM.VALUE(1, 2000);
 
-            insert into clienti values ( v_i,v_nume, v_prenume, 0, '1234560', 'email', v_cnp,1, sysdate, sysdate);
+       insert into clienti values ( v_i,v_nume, v_prenume, 0, '1234560', 'email', v_cnp,1, sysdate, sysdate);
 
-        END LOOP;*/
+   END LOOP;*/
