@@ -85,5 +85,5 @@ select *
 from table (select get_active_routes() from dual);
 select *
 from table (select get_traseu_cursa(3) from dual);
-select get_fastest_ride(1, 3)
+select get_fastest_ride(3150, 6581)
 from dual;

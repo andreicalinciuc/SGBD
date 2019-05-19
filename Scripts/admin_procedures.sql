@@ -95,7 +95,7 @@ BEGIN
         VALUES ((SELECT max(ID) + 1 from SOFERI), adresa, capacitate, sysdate, sysdate);
 
     end if;
-END AddDriver;
+END AddDepou;
 
 
 --     Sterge sofer.

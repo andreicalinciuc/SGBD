@@ -11,28 +11,13 @@
 <body style="margin: 0; padding: 2% 20%;">
     <main>
         <section style="width: 100%; padding: 8px; border: 1px solid black;">
-            <input placeholder="Nume statie" type="text" id="statie_nume_input">
-            <input placeholder="Oras statie" type="text" id="statie_oras_input">
-            <button type="button" onclick="adauga_statie();">
-                Adauga statie
-            </button>
-        </section>
-
-        <section style="width: 100%; padding: 8px; border: 1px solid black;">
-            <input placeholder="Capacitate vehicul" type="text" id="vehicul_capacitate_input">
-            <input placeholder="Stare vehicul (int)" type="text" id="vehicul_stare_input">
-            <input placeholder="ID depou vehicul" type="text" id="vehicul_id_depou_input">
-            <button type="button" onclick="adauga_vehicul();">
-                Adauga vehicul
-            </button>
-        </section>
-
-        <section style="width: 100%; padding: 8px; border: 1px solid black;">
-            <input placeholder="Numar traseu" type="text" id="traseu_numar_input">
-            <input placeholder="Statie pornire traseu" type="text" id="traseu_from_statie_input">
-            <input placeholder="Statie final traseu" type="text" id="traseu_to_statie_input">
-            <button type="button" onclick="adauga_traseu();">
-                Adauga traseu
+            <input placeholder="Nume client" type="text" id="client_nume_input">
+            <input placeholder="Prenume client" type="text" id="client_prenume_input">
+            <input placeholder="Nr. telefon client" type="text" id="client_telefon_input">
+            <input placeholder="Email client" type="text" id="client_email_input">
+            <input placeholder="CNP client" type="text" id="client_cnp_input">
+            <button type="button" onclick="adauga_client();">
+                Adauga client
             </button>
         </section>
 
@@ -45,6 +30,15 @@
             </button>
         </section>
 
+
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Adresa depou" type="text" id="depou_adresa_input">
+            <input placeholder="Capacitate depou" type="text" id="depou_capacitate_input">
+            <button type="button" onclick="adauga_depou();">
+                Adauga depou
+            </button>
+        </section>
+
         <section style="width: 100%; padding: 8px; border: 1px solid black;">
             <input placeholder="Nume sofer" type="text" id="sofer_nume_input">
             <input placeholder="Prenume sofer" type="text" id="sofer_prenume_input">
@@ -52,6 +46,32 @@
             <input placeholder="CNP sofer" type="text" id="sofer_cnp_input">
             <button type="button" onclick="adauga_sofer();">
                 Adauga sofer
+            </button>
+        </section>
+
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Nume statie" type="text" id="statie_nume_input">
+            <input placeholder="Oras statie" type="text" id="statie_oras_input">
+            <button type="button" onclick="adauga_statie();">
+                Adauga statie
+            </button>
+        </section>
+
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Numar traseu" type="text" id="traseu_numar_input">
+            <!-- <input placeholder="Statie pornire traseu" type="text" id="traseu_from_statie_input">
+            <input placeholder="Statie final traseu" type="text" id="traseu_to_statie_input"> -->
+            <button type="button" onclick="adauga_traseu();">
+                Adauga traseu
+            </button>
+        </section>
+
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Capacitate vehicul" type="text" id="vehicul_capacitate_input">
+            <input placeholder="Stare vehicul (int)" type="text" id="vehicul_stare_input">
+            <input placeholder="ID depou vehicul" type="text" id="vehicul_id_depou_input">
+            <button type="button" onclick="adauga_vehicul();">
+                Adauga vehicul
             </button>
         </section>
 

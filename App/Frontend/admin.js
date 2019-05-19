@@ -40,38 +40,19 @@ function request(){
 }
 
 function sanitizeString(str){
-    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
-    return str.trim();
+    // str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str;//.trim();
 }
 
-function adauga_statie(){
+function adauga_client(){
     request('POST',
-    'http://localhost:5000/procedure/AddStation',
+    'http://localhost:5000/procedure/AddClient',
     [
-        sanitizeString(document.getElementById("statie_nume_input").value),
-        sanitizeString(document.getElementById("statie_oras_input").value)
-    ]
-    );
-}
-
-function adauga_vehicul(){
-    request('POST',
-    'http://localhost:5000/procedure/AddVehicle',
-    [
-        parseInt(document.getElementById("vehicul_capacitate_input").value),
-        parseInt(document.getElementById("vehicul_stare_input").value),
-        parseInt(document.getElementById("vehicul_id_depou_input").value)
-    ]
-    );
-}
-
-function adauga_traseu(){
-    request('POST',
-    'http://localhost:5000/procedure/AddTraseu',
-    [
-        parseInt(document.getElementById("traseu_numar_input").value),
-        parseInt(document.getElementById("traseu_from_statie_input").value),
-        parseInt(document.getElementById("traseu_to_statie_input").value)
+        sanitizeString(document.getElementById("client_nume_input").value),
+        sanitizeString(document.getElementById("client_prenume_input").value),
+        sanitizeString(document.getElementById("client_telefon_input").value),
+        sanitizeString(document.getElementById("client_email_input").value),
+        sanitizeString(document.getElementById("client_cnp_input").value)
     ]
     );
 }
@@ -87,13 +68,56 @@ function lanseaza_cursa(){
     );
 }
 
+function adauga_depou(){
+    request('POST',
+    'http://localhost:5000/procedure/AddDepou',
+    [
+        sanitizeString(document.getElementById("depou_adresa_input").value),
+        parseInt(document.getElementById("depou_capacitate_input").value)
+    ]
+    );
+}
+
 function adauga_sofer(){
     request('POST',
-    'http://localhost:5000/procedure/AddDriver',[
+    'http://localhost:5000/procedure/AddSofer',[
         sanitizeString(document.getElementById("sofer_nume_input").value),
         sanitizeString(document.getElementById("sofer_prenume_input").value),
         sanitizeString(document.getElementById("sofer_telefon_input").value),
         sanitizeString(document.getElementById("sofer_cnp_input").value)
+    ]
+    );
+}
+
+function adauga_statie(){
+    request('POST',
+    'http://localhost:5000/procedure/AddStatie',
+    [
+        sanitizeString(document.getElementById("statie_nume_input").value),
+        sanitizeString(document.getElementById("statie_oras_input").value)
+    ]
+    );
+}
+
+function adauga_traseu(){
+    request('POST',
+    'http://localhost:5000/procedure/AddTraseu',
+    [
+        parseInt(document.getElementById("traseu_numar_input").value)//,
+        // parseInt(document.getElementById("traseu_from_statie_input").value),
+        // parseInt(document.getElementById("traseu_to_statie_input").value)
+    ]
+    );
+}
+
+
+function adauga_vehicul(){
+    request('POST',
+    'http://localhost:5000/procedure/AddVehicul',
+    [
+        parseInt(document.getElementById("vehicul_capacitate_input").value),
+        parseInt(document.getElementById("vehicul_stare_input").value),
+        parseInt(document.getElementById("vehicul_id_depou_input").value)
     ]
     );
 }

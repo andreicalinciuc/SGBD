@@ -31,16 +31,21 @@ _conn = cx_Oracle.connect('{}/{}@{}/{}'.format(
 _cursor = _conn.cursor()
 
 available_procedures = {
-    "AddStation": [unicode, unicode],
-    "AddVehicle": [int, int, int],
-    "AddTraseu": [int, int, int],
+    "AddClient": [unicode, unicode, unicode, unicode, unicode],
     "StartCursa": [int, int, int],
-    "AddDriver": [unicode, unicode, unicode, unicode],
+    "AddDepou": [unicode, int],
+    "AddSofer": [unicode, unicode, unicode, unicode],
+    "AddStatie": [unicode, unicode],
+    "AddTraseu": [int], #[int, int, int],
+    "AddVehicul": [int, int, int],
+
     "DeleteStation": [],
     "DeleteVehicle": [],
     "EndCursa": [],
     "DeleteDriver": [],
+
     "MoveVehicle": [],
+
     "PassagerIn": [int, int],
     "PassagerOut": [int]
 }
