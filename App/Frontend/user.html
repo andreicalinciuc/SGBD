@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="margin: 0; padding: 2% 20%;">
+    <main>
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="User ID" type="text" id="id_user_input">
+            <button type="button" onclick="get_user_data();">
+                Login
+            </button>
+        </section>
+
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <button type="button" onclick="trasee_active();">
+                Vezi traseele active
+            </button>
+        </section>
+    
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Numarul cursei" type="text" id="id_cursa_input">
+            <button type="button" onclick="statiile_cursei();">
+                Vezi statiile cursei
+            </button>
+            <button type="button" onclick="urca_in_cursa();">
+                Urca in cursa
+            </button>
+            <button type="button" onclick="coboara_din_cursa();">
+                Coboara din cursa
+            </button>
+        </section>
+    
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <input placeholder="Statie plecare" type="text" id="id_node_from_input">
+            <input placeholder="Statie destinatie" type="text" id="id_node_to_input">
+            <button type="button" onclick="cea_mai_rapida_cursa();">
+                Vezi cel mai rapid traseu si durata calatoriei
+            </button>
+        </section>
+    
+    
+        <section style="width: 100%; padding: 8px; border: 1px solid black;">
+            <textarea rows="10" id="output-console" style="width: calc(100% - 8px); max-width: calc(100% - 8px); min-width: calc(100% - 8px);">
+            </textarea>
+        </section>
+    </main>
+    <script src="user.js"></script>
+</body>
+</html>

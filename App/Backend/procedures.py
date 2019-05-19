@@ -30,20 +30,20 @@ _conn = cx_Oracle.connect('{}/{}@{}/{}'.format(
 
 _cursor = _conn.cursor()
 
-available_procedures = [
-    "AddStation",
-    "DeleteStation",
-    "AddDriver",
-    "DeleteDriver",
-    "AddVehicle",
-    "DeleteVehicle",
-    "MoveVehicle",
-    "AddTraseu",
-    "StartCursa",
-    "EndCursa",
-    "PassagerIn",
-    "PassagerOut"
-]
+available_procedures = {
+    "AddStation": [],
+    "DeleteStation": [],
+    "AddDriver": [],
+    "DeleteDriver": [],
+    "AddVehicle": [],
+    "DeleteVehicle": [],
+    "MoveVehicle": [],
+    "AddTraseu": [],
+    "StartCursa": [],
+    "EndCursa": [],
+    "PassagerIn": [int, int],
+    "PassagerOut": [int]
+}
 
 def ExecuteProcedure(procedure, args_list):
     if procedure in available_procedures:
@@ -52,12 +52,12 @@ def ExecuteProcedure(procedure, args_list):
             _cursor.execute("commit")
         except Exception, e:
             print("Error encountered while executing procedure '{}':\n{}".format(procedure, e))
-            return False
-        return True
+            return False, str(e)
+        return True, ""
     print("Procedure '{}' is not in the 'available procedures' list.".format(procedure))
-    return False
+    return False, "Procedure '{}' is not in the 'available procedures' list.".format(procedure)
 
-ExecuteProcedure("AddDriver", ["test", "test", "0737555666", "1983234456252"])
+ExecuteProcedure("AddDriver", ["test", "test", "[]737555666", "1983234456252"])
 
 import atexit
 def _atexit(connection):
