@@ -23,11 +23,9 @@ CREATE OR REPLACE PROCEDURE DeleteStation(id_station IN number)
     v_statii_count int := 1;
     cursor c_traseu is
         (select unique ID_TRASEU
-         from TRASEE_STATII
-         where ID_STATIE_TO = id_station
-            or ID_STATIE_FROM = id_station);
+         from TRASEE_STATII where ID_STATIE_TO = id_station or ID_STATIE_FROM = id_station);
     cursor c_statii (traseu_id in integer) is
-        (select ID_STATIE_FROM, ID_STATIE_TO from TRASEE_STATII where ID_TRASEU = traseu_id ORDER BY ID);
+        (select ID_STATIE_FROM, ID_STATIE_TO from TRASEE_STATII where ID_TRASEU = traseu_id);
 BEGIN
     for v_traseu in c_traseu
         loop
@@ -54,15 +52,14 @@ BEGIN
                     v_statii_count := v_statii_count + 1;
 
                 end loop;
-        /*    delete from TRASEE_STATII where ID_TRASEU=v_traseu.ID_TRASEU;
-            insert into TRASEE_STATII ()*/
+            delete from TRASEE_STATII where ID_TRASEU=v_traseu.ID_TRASEU;
+            insert into TRASEE_STATII ()
 
         end loop;
         for line in 1..v_statii_count
             loop
                  DBMS_OUTPUT.put_line(v_statii_from(line) ||' '||  v_statii_to(line));
             end loop;
-
 END DeleteStation;
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="request('GET', 'http://localhost:5000/get_active_routes');">
+        Vezi traseele active
+    </button>
+    <button type="button" onclick="request('GET', 'http://localhost:5000/get_traseu_cursa/1');">
+        Vezi statiile traseului 1
+    </button>
+    <button type="button" onclick="request('GET', 'http://localhost:5000/get_fastest_ride/1,4');">
+        Vezi cel mai rapid traseu si durata calatoriei intre statiile 1 si 4
+    </button>
+    <textarea rows="20" cols="50" id="output-console"></textarea>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,37 +1,24 @@
 from flask import Flask
 from flask import request
-# from client_db import 
-from admin_db import Client
+from flask import jsonify
+from flask_cors import CORS
+from functions import get_active_routes, get_traseu_cursa, get_fastest_ride
 
-client = Client()
-client.GetOne(1)
-result = client.GetResult()
-for field in result:
-    print field, result[field]
+app = Flask(__name__)
+CORS(app)
 
+@app.route("/get_active_routes", methods = ["GET"])
+def active_routes():
+    return jsonify(get_active_routes()), 200
 
-# app = Flask(__name__)
+@app.route("/get_traseu_cursa/<id_cursa>", methods = ["GET"])
+def traseu_cursa(id_cursa):
+    return jsonify(get_traseu_cursa(id_cursa)), 200
 
-# @app.route("/", methods = ["GET"])
-# def get_all_tasks():
-#     pass
-
-# @app.route("/<id>", methods = ["GET"])
-# def get_task_by_id(task_id):
-#     pass
-
-# @app.route("/", methods = ["POST"])
-# def add_assignement():
-#     pass
-
-# @app.route("/", methods = ["PUT"])
-# def update_assignement():
-#     pass
-
-# @app.route("/", methods = ["DELETE"])
-# def delete_assignment():
-#     pass
+@app.route("/get_fastest_ride/<id_from>,<id_to>", methods = ["GET"])
+def fastest_ride(id_from, id_to):
+    return jsonify(get_fastest_ride(id_from, id_to)), 200
 
 
-# if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=5122)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

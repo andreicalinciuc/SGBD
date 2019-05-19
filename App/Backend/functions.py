@@ -37,15 +37,15 @@ def get_active_routes():
 
 def get_traseu_cursa(id_cursa):
     return _cursor.callfunc(
-        "get_traseu_cursa", _cursor.var(cx_Oracle.OBJECT, typename='int_list', arguments=[id_cursa])
+        "get_traseu_cursa", _cursor.var(cx_Oracle.OBJECT, typename='int_list'),
+        parameters=[id_cursa]
         ).aslist()
 
 def get_fastest_ride(node_from, node_to):
     return _cursor.callfunc(
-        "get_fastest_ride", _cursor.var(cx_Oracle.OBJECT, typename='int_list', arguments=[node_from, node_to])
+        "get_fastest_ride", _cursor.var(cx_Oracle.OBJECT, typename='int_list'),
+        parameters=[node_from, node_to]
         ).aslist()
-
-print get_active_routes()
 
 import atexit
 def _atexit(connection):

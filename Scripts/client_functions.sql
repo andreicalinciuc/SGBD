@@ -45,7 +45,7 @@ create or replace function get_fastest_ride(from_station integer, to_station int
     cursor c_trasee_active is
         (select unique id_traseu from curse);
     cursor c_statii_traseu (traseu_id in integer) is
-        (select id_statie_from, id_statie_to from trasee_statii where id_traseu = traseu_id);
+        (select id_statie_from, id_statie_to from trasee_statii where id_traseu = traseu_id order by id);
 begin
     open c_trasee_active;
     loop
