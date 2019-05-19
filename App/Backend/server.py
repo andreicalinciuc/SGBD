@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from functions import get_active_routes, get_traseu_cursa, get_fastest_ride
+from functions import get_active_routes, get_traseu_cursa, get_fastest_ride, get_clienti_in_cursa
 from procedures import available_procedures, ExecuteProcedure
 
 app = Flask(__name__)
@@ -15,6 +15,10 @@ def active_routes():
 @app.route("/get_traseu_cursa/<id_cursa>", methods = ["GET"])
 def traseu_cursa(id_cursa):
     return jsonify(get_traseu_cursa(id_cursa)), 200
+
+@app.route("/get_clienti_in_cursa/<id_cursa>", methods = ["GET"])
+def clienti_cursa(id_cursa):
+    return jsonify(get_clienti_in_cursa(id_cursa)), 200
 
 @app.route("/get_fastest_ride/<id_from>,<id_to>", methods = ["GET"])
 def fastest_ride(id_from, id_to):

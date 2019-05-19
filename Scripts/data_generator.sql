@@ -313,7 +313,7 @@ begin
           END LOOP;
 
 --clienti
- for v_i in 1..1000000
+ for v_i in 1..100000
         LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
@@ -355,7 +355,7 @@ begin
             id_cursa := DBMS_RANDOM.VALUE(1, 2000);
             select count(*) into v_id from CURSE;
             insert into clienti(id, nume, prenume, fonduri, nr_telefon, email, cnp, id_cursa, created_at, updated_at)
-            values (v_i, v_nume, v_prenume, 0, '123456', 'email', v_cnp, DBMS_RANDOM.VALUE(1, 1), sysdate, sysdate);
+            values (v_i, v_nume, v_prenume, 0, '123456', 'email', v_cnp, DBMS_RANDOM.VALUE(1, 5000), sysdate, sysdate);
 
         END LOOP;
 end;

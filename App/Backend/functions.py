@@ -41,6 +41,12 @@ def get_traseu_cursa(id_cursa):
         parameters=[id_cursa]
         ).aslist()
 
+def get_clienti_in_cursa(id_cursa):
+    return _cursor.callfunc(
+        "get_clienti_in_cursa", _cursor.var(cx_Oracle.OBJECT, typename='int_list'),
+        parameters=[id_cursa]
+        ).aslist()
+
 def get_fastest_ride(node_from, node_to):
     return _cursor.callfunc(
         "get_fastest_ride", _cursor.var(cx_Oracle.OBJECT, typename='int_list'),

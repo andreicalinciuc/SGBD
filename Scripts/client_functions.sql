@@ -25,6 +25,18 @@ begin
 end get_traseu_cursa;
 /
 
+create or replace function get_clienti_in_cursa(cursa_id integer)
+    return int_list
+    is
+    client_ids int_list;
+begin
+    select id bulk collect into client_ids
+    from clienti
+    where ID_CURSA = cursa_id;
+    return (client_ids);
+end get_clienti_in_cursa;
+/
+
 -- Functie FindFastestRide(from_station, to_station):
 --     Clientul cere ruta cea mai rapida de la from_station la to_station.
 --     Aplicatia cauta ce trasee contin from_station si to_station.
@@ -87,3 +99,4 @@ select *
 from table (select get_traseu_cursa(3) from dual);
 select get_fastest_ride(3150, 6581)
 from dual;
+

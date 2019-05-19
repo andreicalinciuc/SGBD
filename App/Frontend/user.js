@@ -57,6 +57,13 @@ function statiile_cursei(){
     );
 }
 
+function clientii_cursei(){
+    request('GET',
+    'http://localhost:5000/get_clienti_in_cursa/' +
+    parseInt(document.getElementById("id_cursa_input").value)
+    );
+}
+
 function urca_in_cursa(){
     request('POST',
     'http://localhost:5000/procedure/PassagerIn',
