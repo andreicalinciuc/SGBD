@@ -211,14 +211,15 @@ END EndCursa;
 -- Procedura PassangerIn(passanger, cursa):
 CREATE OR REPLACE PROCEDURE PassagerIn(id_pasager in number, v_id_cursa in number) AS
     v_id    number;
+    v_cursa_curenta number;
     v_cursa number;
 BEGIN
 
-    SELECT ID_CURSA into v_cursa from CLIENTI where ID_CURSA = v_id_cursa;
-    SELECT ID into v_id from CLIENTI where ID = id_pasager;
+    SELECT ID into v_cursa from CURSE where ID = v_id_cursa;
+    SELECT ID, ID_CURSA into v_id, v_cursa_curenta from CLIENTI where ID = id_pasager;
 
 
-    if v_id is NULL or v_cursa is NULL then
+    if v_id is NULL or v_cursa is NULL or v_cursa_curenta is not NULL then
         raise NO_DATA_FOUND;
     end if;
 
@@ -231,10 +232,11 @@ END PassagerIn;
 
 CREATE OR REPLACE PROCEDURE PassagerOut(id_pasager in number) AS
     v_id number;
+    v_cursa number;
 BEGIN
 
-    SELECT ID into v_id from CLIENTI where ID = id_pasager;
-    if v_id is NULL then
+    SELECT ID, ID_CURSA into v_id, v_cursa from CLIENTI where ID = id_pasager;
+    if v_id is NULL or v_cursa is NULL then
         raise NO_DATA_FOUND;
     end if;
 
