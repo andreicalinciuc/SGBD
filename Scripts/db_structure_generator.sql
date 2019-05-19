@@ -111,3 +111,16 @@ CREATE TABLE costuri_muchii(
     updated_at DATE,
     constraint costuri_muchii_uniqueness unique (id_nod_from, id_nod_to)
 );
+
+
+
+/*
+
+insert into depou values (1, 'test', 60, sysdate, sysdate);
+
+insert into vehicule_depou values (4, 30, 1, 1, sysdate, sysdate);
+
+insert into curse values (4, 2, 4, 4, sysdate, sysdate);
+
+insert into clienti values (4, 'test', 'ptest', 0, '0737853905', 'raduradu55@gmail.com', '1980512553454', NULL, sysdate, sysdate);
+*/
