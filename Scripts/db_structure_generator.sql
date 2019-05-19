@@ -45,7 +45,7 @@ CREATE TABLE vehicule_depou(
 
 CREATE TABLE statii(
   id INT NOT NULL PRIMARY KEY,
-  nume VARCHAR2(15) unique NOT NULL,
+  nume VARCHAR2(25) unique NOT NULL,
   adresa varchar2(50) unique NOT NULL,
   created_at DATE,
   updated_at DATE
@@ -54,7 +54,7 @@ CREATE TABLE statii(
 
 CREATE TABLE trasee(
   id INT NOT NULL PRIMARY KEY,
-  nume VARCHAR2(15) unique NOT NULL,
+  nume VARCHAR2(25) unique NOT NULL,
   created_at DATE,
   updated_at DATE
 );
@@ -113,15 +113,7 @@ CREATE TABLE costuri_muchii(
 );
 /
 
-insert into statii (id, nume, adresa, created_at, updated_at) values (1, 'test1', 'test1', sysdate, sysdate);
-insert into statii (id, nume, adresa, created_at, updated_at) values (2, 'test2', 'test2', sysdate, sysdate);
-insert into statii (id, nume, adresa, created_at, updated_at) values (3, 'test3', 'test3', sysdate, sysdate);
-insert into statii (id, nume, adresa, created_at, updated_at) values (4, 'test4', 'test4', sysdate, sysdate);
-insert into statii (id, nume, adresa, created_at, updated_at) values (5, 'test5', 'test5', sysdate, sysdate);
 
-insert into trasee (id, nume, created_at, updated_at) values (1, 'test1', sysdate, sysdate);
-insert into trasee (id, nume, created_at, updated_at) values (2, 'test2', sysdate, sysdate);
-insert into trasee (id, nume, created_at, updated_at) values (3, 'test3', sysdate, sysdate);
 
 insert into trasee_statii values (1, 1, 1, 2, sysdate, sysdate);
 insert into trasee_statii values (2, 1, 2, 3, sysdate, sysdate);
@@ -160,10 +152,7 @@ insert into costuri_muchii values (18, 5, 2, 5, sysdate, sysdate);
 insert into costuri_muchii values (19, 5, 3, 5, sysdate, sysdate);
 insert into costuri_muchii values (20, 5, 4, 5, sysdate, sysdate);
 
-insert into soferi values (1, 'test', 'ptest', '0737883905', '1980512553456', sysdate, sysdate);
-insert into soferi values (2, 'test', 'ptest', '0737873905', '1980512553457', sysdate, sysdate);
-insert into soferi values (3, 'test', 'ptest', '0737863905', '1980512553458', sysdate, sysdate);
-insert into soferi values (4, 'test', 'ptest', '0737853905', '1980512553459', sysdate, sysdate);
+
 
 insert into depou values (1, 'test', 60, sysdate, sysdate);
 
