@@ -31,21 +31,22 @@ _conn = cx_Oracle.connect('{}/{}@{}/{}'.format(
 _cursor = _conn.cursor()
 
 available_procedures = {
-    "AddStation": [],
+    "AddStation": [unicode, unicode],
+    "AddVehicle": [int, int, int],
+    "AddTraseu": [int, int, int],
+    "StartCursa": [int, int, int],
+    "AddDriver": [unicode, unicode, unicode, unicode],
     "DeleteStation": [],
-    "AddDriver": [],
-    "DeleteDriver": [],
-    "AddVehicle": [],
     "DeleteVehicle": [],
-    "MoveVehicle": [],
-    "AddTraseu": [],
-    "StartCursa": [],
     "EndCursa": [],
+    "DeleteDriver": [],
+    "MoveVehicle": [],
     "PassagerIn": [int, int],
     "PassagerOut": [int]
 }
 
 def ExecuteProcedure(procedure, args_list):
+    print args_list
     if procedure in available_procedures:
         try:
             _cursor.callproc(procedure, args_list)

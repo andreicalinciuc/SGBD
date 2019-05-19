@@ -21,8 +21,6 @@ function request(){
                     console.log("Http.responseText" + Http.responseText);
                 }
             }
-            else
-                console.log("Http.readyState: " + Http.readyState);
         };
 
         if (arguments.length == 3){

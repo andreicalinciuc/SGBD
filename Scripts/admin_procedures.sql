@@ -5,9 +5,9 @@ CREATE OR REPLACE PROCEDURE AddStation(nameStation IN VARCHAR, nameCity IN VARCH
 BEGIN
     select count(*) into v_id from STATII;
     if (v_id < 1) then
-        INSERT INTO STATII(id, NUME, ADRESA) VALUES (1, nameStation, nameCity);
+        INSERT INTO STATII (ID, NUME, ADRESA, CREATED_AT, UPDATED_AT) VALUES (1, nameStation, nameCity, sysdate, sysdate);
     else
-        INSERT INTO STATII(id, NUME, ADRESA) VALUES ((SELECT max(ID) + 1 from STATII), nameStation, nameCity);
+        INSERT INTO STATII(id, NUME, ADRESA) VALUES ((SELECT max(ID) + 1 from STATII), nameStation, nameCity, sysdate, sysdate);
     end if;
 END AddStation;
 
@@ -53,7 +53,6 @@ BEGIN
 
                 end loop;
             delete from TRASEE_STATII where ID_TRASEU=v_traseu.ID_TRASEU;
-            insert into TRASEE_STATII ()
 
         end loop;
         for line in 1..v_statii_count
@@ -77,10 +76,23 @@ CREATE OR REPLACE PROCEDURE AddDriver(nume IN VARCHAR, prenume IN VARCHAR, nrTel
 BEGIN
     select count(*) into v_id from SOFERI;
     if (v_id < 1) then
-        INSERT INTO SOFERI(id, NUME, PRENUME, NR_TELEFON, CNP) VALUES (1, nume, prenume, nrTelefon, cnp);
+        INSERT INTO SOFERI (ID, NUME, PRENUME, NR_TELEFON, CNP, CREATED_AT, UPDATED_AT) VALUES (1, nume, prenume, nrTelefon, cnp, sysdate, sysdate);
     else
-        INSERT INTO SOFERI(id, NUME, PRENUME, NR_TELEFON, CNP)
-        VALUES ((SELECT max(ID) + 1 from SOFERI), nume, prenume, nrTelefon, cnp);
+        INSERT INTO SOFERI(ID, NUME, PRENUME, NR_TELEFON, CNP, CREATED_AT, UPDATED_AT)
+        VALUES ((SELECT max(ID) + 1 from SOFERI), nume, prenume, nrTelefon, cnp, sysdate, sysdate);
+
+    end if;
+END AddDriver;
+
+CREATE OR REPLACE PROCEDURE AddDepou(adresa IN VARCHAR, capacitate IN int) AS
+    v_id number;
+BEGIN
+    select count(*) into v_id from DEPOU;
+    if (v_id < 1) then
+        INSERT INTO DEPOU (ID, ADRESA, CAPACITATE, CREATED_AT, UPDATED_AT) VALUES (1, adresa, capacitate, sysdate, sysdate);
+    else
+        INSERT INTO DEPOU(ID, ADRESA, CAPACITATE, CREATED_AT, UPDATED_AT)
+        VALUES ((SELECT max(ID) + 1 from SOFERI), adresa, capacitate, sysdate, sysdate);
 
     end if;
 END AddDriver;
@@ -115,10 +127,10 @@ CREATE OR REPLACE PROCEDURE AddVehicle(capacitate IN NUMBER, stare IN number, id
 BEGIN
     select count(*) into v_id from VEHICULE_DEPOU;
     if (v_id < 1) then
-        INSERT INTO VEHICULE_DEPOU(id, capacitate_pasageri, stare, id_depou) VALUES (1, capacitate, stare, id_depou);
+        INSERT INTO VEHICULE_DEPOU (ID, CAPACITATE_PASAGERI, STARE, ID_DEPOU, CREATED_AT, UPDATED_AT) VALUES (1, capacitate, stare, id_depou, sysdate, sysdate);
     else
-        INSERT INTO VEHICULE_DEPOU(id, capacitate_pasageri, stare, id_depou)
-        VALUES ((SELECT max(ID) + 1 from VEHICULE_DEPOU), capacitate, stare, id_depou);
+        INSERT INTO VEHICULE_DEPOU (ID, CAPACITATE_PASAGERI, STARE, ID_DEPOU, CREATED_AT, UPDATED_AT)
+        VALUES ((SELECT max(ID) + 1 from VEHICULE_DEPOU), capacitate, stare, id_depou, sysdate, sysdate);
     end if;
 END AddVehicle;
 
@@ -165,11 +177,11 @@ CREATE OR REPLACE PROCEDURE AddTraseu(traseu in number, from_station IN NUMBER, 
 BEGIN
     select count(*) into v_id from TRASEE_STATII;
     if (v_id < 1) then
-        INSERT INTO TRASEE_STATII(ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO)
-        VALUES ('1', traseu, from_station, to_station);
+        INSERT INTO TRASEE_STATII (ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO, CREATED_AT, UPDATED_AT)
+        VALUES ('1', traseu, from_station, to_station, sysdate, sysdate);
     else
-        INSERT INTO TRASEE_STATII(ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO)
-        VALUES ((SELECT max(ID) + 1 from TRASEE_STATII), traseu, from_station, to_station);
+        INSERT INTO TRASEE_STATII (ID, ID_TRASEU, ID_STATIE_FROM, ID_STATIE_TO, CREATED_AT, UPDATED_AT)
+        VALUES ((SELECT max(ID) + 1 from TRASEE_STATII), traseu, from_station, to_station, sysdate, sysdate);
     end if;
 END AddTraseu;
 
@@ -182,13 +194,12 @@ CREATE OR REPLACE PROCEDURE StartCursa(vehicul in number, sofer IN NUMBER, trase
 BEGIN
     select count(*) into v_id from CURSE;
     if (v_id < 1) then
-        INSERT INTO CURSE(id, id_traseu, id_sofer, ID_VEHICUL) VALUES ('1', traseu, sofer, vehicul);
+        INSERT INTO CURSE (ID, ID_TRASEU, ID_SOFER, ID_VEHICUL, CREATED_AT, UPDATED_AT) VALUES ('1', traseu, sofer, vehicul, sysdate, sysdate);
 
     else
-        INSERT INTO CURSE(id, id_traseu, id_sofer, ID_VEHICUL)
-        VALUES ((SELECT max(ID) + 1 from CURSE), traseu, sofer, vehicul);
+        INSERT INTO CURSE (ID, ID_TRASEU, ID_SOFER, ID_VEHICUL, CREATED_AT, UPDATED_AT)
+        VALUES ((SELECT max(ID) + 1 from CURSE), traseu, sofer, vehicul, sysdate, sysdate);
     end if;
-    UPDATE VEHICULE_DEPOU set STARE= '1' where id = vehicul;
 
 END StartCursa;
 

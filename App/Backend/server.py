@@ -23,6 +23,7 @@ def fastest_ride(id_from, id_to):
 @app.route("/procedure/<procedure_name>", methods = ["POST"])
 def exec_procedure(procedure_name):
     if procedure_name in available_procedures:
+        print request.json
         if isinstance(request.json, list):
             param_types_list = [type(elem) for elem in request.json]
             if param_types_list == available_procedures[procedure_name]:
