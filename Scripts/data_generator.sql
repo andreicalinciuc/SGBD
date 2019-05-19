@@ -189,11 +189,23 @@ end;
 
         END LOOP;
 
+end loop;
 
 
+/*    FOR v_i IN 1..2000
 
-    FOR v_i IN 1..2000
-        LOOP
+
+end loop;
+/*
+clienti 1.000.000
+depou 100
+soferi 10000
+statii 10000
+trasee 1000
+vehicule_depou 12000*/
+
+
+     /*   LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
                 v_prenume1 := lista_prenume_fete(TRUNC(DBMS_RANDOM.VALUE(0, lista_prenume_fete.count)) + 1);
@@ -218,7 +230,7 @@ end;
                 v_prenume := v_prenume1;
             END IF;
 
-            v_fonduri := '';
+            v_fonduri := 0;
             IF (DBMS_RANDOM.VALUE(0, 100) < 10) THEN
                 v_fonduri := TRUNC(DBMS_RANDOM.VALUE(0, 10)) * 10 + 50;
             else
@@ -235,16 +247,4 @@ end;
 
             insert into clienti values ( v_i,v_nume, v_prenume, 0, '1234560', 'email', v_cnp,1, sysdate, sysdate);
 
-        END LOOP;
-
-
-end;
-/*
-clienti 1.000.000
-depou 100
-soferi 10000
-statii 10000
-trasee 1000
-vehicule_depou 12000*/
-
-
+        END LOOP;*/

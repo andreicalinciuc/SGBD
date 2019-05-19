@@ -195,16 +195,16 @@ END StartCursa;
 
 --     Incheie cursa, eliberand vehiculul si soferul.
 
-CREATE OR REPLACE PROCEDURE EndCursa(vehicul in number) AS
+CREATE OR REPLACE PROCEDURE EndCursa(id_cursa in number) AS
     v_id number;
 BEGIN
-    SELECT id into v_id from CURSE where id = vehicul;
+    SELECT id into v_id from CURSE where id = id_cursa;
 
     if v_id = NULL then
         raise NO_DATA_FOUND;
     end if;
 
-    DELETE from CURSE where ID_VEHICUL = vehicul;
+    DELETE from CURSE where ID = id_cursa;
 END EndCursa;
 
 
