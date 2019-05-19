@@ -313,7 +313,7 @@ begin
           END LOOP;
 
 --clienti
- for v_i in 1..100000
+ for v_i in 1..1000000
         LOOP
             v_nume := lista_nume(TRUNC(DBMS_RANDOM.VALUE(0, lista_nume.count)) + 1);
             IF (DBMS_RANDOM.VALUE(0, 100) < 50) THEN
